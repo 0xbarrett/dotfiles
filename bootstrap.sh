@@ -2,6 +2,7 @@
 
 ln -f .zshrc $HOME/.zshrc
 ln -f .gitconfig $HOME/.gitconfig
+ln -f .zsh_aliases $HOME/.zsh_aliases
 
 [[ ! -d $HOME/.config ]] && mkdir $HOME/.config
 [[ ! -d $HOME/.config/nvim ]] && mkdir $HOME/.config/nvim
