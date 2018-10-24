@@ -1,0 +1,15 @@
+# view settings
+set main-view-id = yes
+set main-view-author = abbreviated
+set main-view-date = relative-compact
+set line-graphics = utf-8
+set refresh-mode = auto
+
+# key bindings
+#bind diff <Up> move-up
+#bind diff <Down> move-down
+bind diff 7 !git diff %(commit)^ %(commit)
+bind diff d !git difftool --no-prompt %(commit)^ %(commit)
+
+# other settings
+set commit-order = topo
