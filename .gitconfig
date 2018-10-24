@@ -1,46 +1,70 @@
+[include]
+	path = .gitconfig_local
+
 [user]
 	name = Barrett Brown
-	email = barrettb@ieee.org
 	signingkey = E8521E262B7AC8C9
 
 [core]
 	excludesfile = /Users/barrettbrown/.gitignore_global
 	editor = micro
 	pager = "diff-so-fancy | less --tabs=4 -RFX"
+	autocrlf = input
+	safecrlf = false
 
 [commit]
 	gpgsign = true
 
-[gpg]
-	program = gpg2
-
-[credential]
-	helper = osxkeychain
-
-[apply]
-	whitespace = warn
-
 [diff]
 	tool = araxis
-	mnemonicprexix = true
+	mnemonicprefix = true
 
 [merge]
 	tool = araxis
 	stat = true
 
+[mergetool "araxis"]
+	path = /Applications/Araxis Merge.app/Contents/Utilities/compare
+	keepBackup = false
+
 [difftool "araxis"]
 	path = /Applications/Araxis Merge.app/Contents/Utilities/compare
 
-[mergetool "araxis"]
-	path = /Applications/Araxis Merge.app/Contents/Utilities/compare
+[alias]
+	s = status
+	st = status -s
+	f = fetch --prune
+	tree = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	lc  = "!f() { git ll "$1"^.."$1"; }; f"
+	lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+	fl = log -u
+	filelog = log -u
+	dl = "!git ll -1"
+	dlc = diff --cached HEAD^
+	subup = submodule update --init --recursive --force
+	sup = subup
+	la = "!git config -l | grep alias | cut -c 7-"
+	bcu = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+	unstage = reset HEAD
+	dangled="!git fsck --no-reflog | awk '/dangling commit/ {print $3}'"
+	opr = "!open-pr"
 
-[difftool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/araxiscompare-w.sh -2 \"$LOCAL\" \"$REMOTE\"
-	path = 
+[apply]
+	whitespace = warn
 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/araxisgitmerge-w.sh \"$REMOTE\" \"$BASE\" \"$LOCAL\" \"$MERGED\"
-	trustExitCode = true
+[credential]
+	helper = osxkeychain
+
+[http "https://github.appl.ge.com"]
+	proxy =
+
+[https "https://github.appl.ge.com"]
+	proxy =
+
+[gpg]
+	program = gpg2
 
 [color]
 	ui = true
@@ -59,29 +83,13 @@
 	new = green bold
 	whitespace = red reverse
 
-[push]
-	default = simple
-
 [diff-so-fancy]
 	stripLeadingSymbols = false
 
-[alias]
-	s = status
-	st = status -s
-	f = fetch --prune
-	tree = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-	ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
-	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-	lc  = "!f() { git ll "$1"^.."$1"; }; f"
-	lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
-	fl = log -u
-	filelog = log -u
-	dl = "!git ll -1"
-	dlc = diff --cached HEAD^
-	subup = submodule update --init --recursive --force
-	sup = subup
-	la = "!git config -l | grep alias | cut -c 7-"
-	branchcleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
-	unstage = reset HEAD
-	dangled="!git fsck --no-reflog | awk '/dangling commit/ {print $3}'"
-	opr = "!open-pr"
+[difftool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/araxiscompare-w.sh -2 \"$LOCAL\" \"$REMOTE\"
+	path =
+
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/araxisgitmerge-w.sh \"$REMOTE\" \"$BASE\" \"$LOCAL\" \"$MERGED\"
+	trustExitCode = true
