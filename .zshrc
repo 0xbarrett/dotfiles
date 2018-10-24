@@ -90,7 +90,7 @@ zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "k4rthik/git-cal",  as:command
 zplug "peco/peco",        as:command, from:gh-r
 zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf, \
-	use:"*${(L)$(uname -s)}*amd64*"
+    use:"*${(L)$(uname -s)}*amd64*"
 zplug "junegunn/fzf", use:"shell/*.zsh", as:plugin
 
 # Enhanced cd
@@ -310,13 +310,13 @@ setup_agents() {
   [[ $UID -eq 0 ]] && return
 
   if (( $+commands[keychain] )); then
-	local -a ssh_keys gpg_keys
-	for i in ~/.ssh/**/*pub; do test -f "$i(.N:r)" && ssh_keys+=("$i(.N:r)"); done
-	gpg_keys=$(gpg -K --with-colons 2>/dev/null | awk -F : '$1 == "sec" { print $5 }')
+    local -a ssh_keys gpg_keys
+    for i in ~/.ssh/**/*pub; do test -f "$i(.N:r)" && ssh_keys+=("$i(.N:r)"); done
+    gpg_keys=$(gpg -K --with-colons 2>/dev/null | awk -F : '$1 == "sec" { print $5 }')
     if (( $#ssh_keys > 0 )) || (( $#gpg_keys > 0 )); then
-	  alias run_agents='() { $(whence -p keychain) --quiet --eval --inherit any-once --agents ssh,gpg $ssh_keys ${(f)gpg_keys} }'
-	  #[[ -t ${fd:-0} || -p /dev/stdin ]] && eval `run_agents`
-	  unalias run_agents
+      alias run_agents='() { $(whence -p keychain) --quiet --eval --inherit any-once --agents ssh,gpg $ssh_keys ${(f)gpg_keys} }'
+      #[[ -t ${fd:-0} || -p /dev/stdin ]] && eval `run_agents`
+      unalias run_agents
     fi
   fi
 }
@@ -335,39 +335,39 @@ fi
 if zplug check "seebi/dircolors-solarized"; then
   which gdircolors &> /dev/null && alias dircolors='() { $(whence -p gdircolors) }'
   which dircolors &> /dev/null && \
-	  eval $(dircolors ~/.zplug/repos/seebi/dircolors-solarized/dircolors.256dark)
+      eval $(dircolors ~/.zplug/repos/seebi/dircolors-solarized/dircolors.256dark)
 fi
 
 if zplug check "zsh-users/zsh-history-substring-search"; then
-	zmodload zsh/terminfo
-	bindkey "$terminfo[kcuu1]" history-substring-search-up
-	bindkey "$terminfo[kcud1]" history-substring-search-down
-	bindkey "^[[1;5A" history-substring-search-up
-	bindkey "^[[1;5B" history-substring-search-down
+    zmodload zsh/terminfo
+    bindkey "$terminfo[kcuu1]" history-substring-search-up
+    bindkey "$terminfo[kcud1]" history-substring-search-down
+    bindkey "^[[1;5A" history-substring-search-up
+    bindkey "^[[1;5B" history-substring-search-down
 fi
 
 if zplug check "zsh-users/zsh-syntax-highlighting"; then
-	#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
-	ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor line)
-	ZSH_HIGHLIGHT_PATTERNS=('rm -rf *' 'fg=white,bold,bg=red')
+    #ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
+    ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor line)
+    ZSH_HIGHLIGHT_PATTERNS=('rm -rf *' 'fg=white,bold,bg=red')
 
-	typeset -A ZSH_HIGHLIGHT_STYLES
-	ZSH_HIGHLIGHT_STYLES[cursor]='fg=yellow'
-	ZSH_HIGHLIGHT_STYLES[globbing]='none'
-	ZSH_HIGHLIGHT_STYLES[path]='fg=white'
-	ZSH_HIGHLIGHT_STYLES[path_pathseparator]='fg=grey'
-	ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan'
-	ZSH_HIGHLIGHT_STYLES[builtin]='fg=cyan'
-	ZSH_HIGHLIGHT_STYLES[function]='fg=cyan'
-	ZSH_HIGHLIGHT_STYLES[command]='fg=green'
-	ZSH_HIGHLIGHT_STYLES[precommand]='fg=green'
-	ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=green'
-	ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=yellow'
-	ZSH_HIGHLIGHT_STYLES[redirection]='fg=magenta'
-	ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=cyan,bold'
-	ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=green,bold'
-	ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=magenta,bold'
-	ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=yellow,bold'
+    typeset -A ZSH_HIGHLIGHT_STYLES
+    ZSH_HIGHLIGHT_STYLES[cursor]='fg=yellow'
+    ZSH_HIGHLIGHT_STYLES[globbing]='none'
+    ZSH_HIGHLIGHT_STYLES[path]='fg=white'
+    ZSH_HIGHLIGHT_STYLES[path_pathseparator]='fg=grey'
+    ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan'
+    ZSH_HIGHLIGHT_STYLES[builtin]='fg=cyan'
+    ZSH_HIGHLIGHT_STYLES[function]='fg=cyan'
+    ZSH_HIGHLIGHT_STYLES[command]='fg=green'
+    ZSH_HIGHLIGHT_STYLES[precommand]='fg=green'
+    ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=green'
+    ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=yellow'
+    ZSH_HIGHLIGHT_STYLES[redirection]='fg=magenta'
+    ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=cyan,bold'
+    ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=green,bold'
+    ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=magenta,bold'
+    ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=yellow,bold'
 fi
 
 if zplug check "b4b4r07/enhancd"; then
@@ -383,8 +383,8 @@ if zplug check "b4b4r07/zsh-history-enhanced"; then
 fi
 
 if zplug check "vifon/deer"; then
-	zle -N deer
-	bindkey '\ek' deer
+    zle -N deer
+    bindkey '\ek' deer
 fi
 
 if zplug check "bhilburn/powerlevel9k"; then
@@ -413,7 +413,7 @@ if zplug check "bhilburn/powerlevel9k"; then
     POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND="$DEFAULT_BACKGROUND"
 
     POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR="\uE0B4"
-	POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR="%F{$(( $DEFAULT_BACKGROUND - 2 ))}|%f"
+    POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR="%F{$(( $DEFAULT_BACKGROUND - 2 ))}|%f"
     POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR="\uE0B6"
     POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR="%F{$(( $DEFAULT_BACKGROUND - 2 ))}|%f"
 
