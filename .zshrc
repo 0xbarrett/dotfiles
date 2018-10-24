@@ -1,19 +1,19 @@
-
+# Path to oh-my-zsh installation.
 export ZSH="/Users/barrettbrown/.oh-my-zsh"
 
 # =============================================================================
 #                                   Functions
 # =============================================================================
 powerlevel9k_random_color(){
-	local code
-	#for code ({000..255}) echo -n "$%F{$code}"
-	#code=$[${RANDOM}%11+10]    # random between 10-20
-	code=$[${RANDOM}%211+20]    # random between 20-230
-	printf "%03d" $code
+    local code
+    #for code ({000..255}) echo -n "$%F{$code}"
+    #code=$[${RANDOM}%11+10]    # random between 10-20
+    code=$[${RANDOM}%211+20]    # random between 20-230
+    printf "%03d" $code
 }
 
 zsh_wifi_signal(){
-	local signal=$(nmcli -t device wifi | grep '^*' | awk -F':' '{print $6}')
+    local signal=$(nmcli -t device wifi | grep '^*' | awk -F':' '{print $6}')
     local color="yellow"
     [[ $signal -gt 75 ]] && color="green"
     [[ $signal -lt 50 ]] && color="red"
@@ -21,15 +21,15 @@ zsh_wifi_signal(){
 }
 
 extip() {
-   curl ipecho.net/plain; echo
+    curl ipecho.net/plain; echo
 }
 
 function f {
-  find . -type f | grep -v .svn | grep -v .git | grep -i $1
+    find . -type f | grep -v .svn | grep -v .git | grep -i $1
 }
 
 function fif() {
-   find . -type f -name $1 -print0 | xargs -0 grep $2
+    find . -type f -name $1 -print0 | xargs -0 grep $2
 }
 
 function fi
@@ -41,7 +41,11 @@ function fi
 }
 
 function build() {
-   make -f $1 -j8 RELEASE=N DEBUG=Y $2
+    make -f $1 -j8 RELEASE=N DEBUG=Y $2
+}
+
+manp() {
+    man -t "$@" | open -f -a Preview;
 }
 
 # =============================================================================
@@ -59,13 +63,17 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 export JAVA_HOME="$(/usr/libexec/java_home)"
 export BAT_THEME="DarkNeon"
 export NVM_DIR="$HOME/.nvm"
+export GOPATH="$HOME/go"
+export XDG_CONFIG_HOME="$HOME/.config"
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='nano'
+    export EDITOR='nano'
 else
-  export EDITOR='micro'
+    export EDITOR='micro'
 fi
+
+export GIT_EDITOR=$EDITOR
 
 # =============================================================================
 #                                   Plugins
@@ -76,10 +84,6 @@ source ~/.zplug/init.zsh
 
 # zplug
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-
-# oh-my-zsh
-#zplug "zplug/zplug"
-#zplug "robbyrussell/oh-my-zsh", use:"lib/*.zsh"
 
 # Miscellaneous commands
 #zplug "andrewferrier/fzf-z"
@@ -107,6 +111,9 @@ zplug "arzzen/calc.plugin.zsh"
 # Directory colors
 zplug "seebi/dircolors-solarized", ignore:"*", as:plugin
 
+# Deer file navigator
+zplug "vifon/deer", use:deer
+
 # Load theme
 zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 
@@ -124,17 +131,15 @@ zplug "plugins/history",           from:oh-my-zsh
 #zplug "plugins/tmux",              from:oh-my-zsh
 #zplug "plugins/tmuxinator",        from:oh-my-zsh
 #zplug "plugins/urltools",          from:oh-my-zsh
-zplug "plugins/web-search",        from:oh-my-zsh
+#zplug "plugins/web-search",        from:oh-my-zsh
 #zplug "plugins/z",                 from:oh-my-zsh
 #zplug "plugins/fancy-ctrl-z",      from:oh-my-zsh
-
-# Supports oh-my-zsh plugins and the like
+zplug "MichaelAquilina/zsh-emojis"
 
 if [[ $OSTYPE = (darwin)* ]]; then
     zplug "lib/clipboard",         from:oh-my-zsh
     zplug "plugins/osx",           from:oh-my-zsh
     #zplug "plugins/brew",          from:oh-my-zsh, if:"(( $+commands[brew] ))"
-    #zplug "plugins/macports",      from:oh-my-zsh, if:"(( $+commands[port] ))"
 fi
 
 zplug "plugins/git",               from:oh-my-zsh, if:"(( $+commands[git] ))"
@@ -148,7 +153,7 @@ zplug "plugins/git",               from:oh-my-zsh, if:"(( $+commands[git] ))"
 #zplug "plugins/rvm",               from:oh-my-zsh, if:"(( $+commands[rvm] ))"
 #zplug "plugins/pip",               from:oh-my-zsh, if:"(( $+commands[pip] ))"
 zplug "plugins/sudo",              from:oh-my-zsh, if:"(( $+commands[sudo] ))"
-#zplug "plugins/gpg-agent",         from:oh-my-zsh, if:"(( $+commands[gpg-agent] ))"
+zplug "plugins/gpg-agent",         from:oh-my-zsh, if:"(( $+commands[gpg-agent] ))"
 #zplug "plugins/systemd",           from:oh-my-zsh, if:"(( $+commands[systemctl] ))"
 #zplug "plugins/docker",            from:oh-my-zsh, if:"(( $+commands[docker] ))"
 #zplug "plugins/docker-compose",    from:oh-my-zsh, if:"(( $+commands[docker-compose] ))"
@@ -157,6 +162,8 @@ zplug "plugins/sudo",              from:oh-my-zsh, if:"(( $+commands[sudo] ))"
 zplug "hlissner/zsh-autopair", defer:2
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
+zplug "caarlos0/open-pr"
+
 # zsh-syntax-highlighting must be loaded after executing compinit command
 # and sourcing other plugins
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
@@ -221,6 +228,7 @@ export LSCOLORS="exgxdHdHcxaHaHhBhDeaec"
 # Generic command adaptations
 alias grep='() { $(whence -p grep) --color=auto $@ }'
 alias egrep='() { $(whence -p egrep) --color=auto $@ }'
+alias vim='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
 
 # Custom helper aliases
 alias cp="cp -iv"
@@ -229,8 +237,20 @@ alias rm='rm -v'
 alias which="type -a"
 alias cx="chmod +x"
 alias make="make -j8"
+alias please='sudo $(fc -ln -1)'
+
+# Remove .DS_Store files from current directory, recursively
+alias rmds="find . -name '*.DS_Store' -type f -delete"
+
+# Additional git aliases
 alias gsup="git sup"
-alias gbcu="git branchcleanup"
+alias gbcu="git bcu"
+alias gtree="git tree"
+alias gopr="open-pr develop"
+alias gdtl="git difftool --no-prompt"
+alias gprl="git pr list --state=all --limit=10 -f \"%sC%>(8)%i%Creset $(print "\ue725") %<(40)%t %Cblue%U%n\""
+alias gprc="hub pull-request -o -c"
+
 alias re-source='source ~/.zshrc'
 alias wch='type -a'
 
@@ -259,7 +279,6 @@ alias 8='pu -8'
 alias 9='pu -9'
 alias pu='() { pushd $1 &> /dev/null; dirs -v; }'
 alias po='() { popd &> /dev/null; dirs -v; }'
-
 
 zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
 
@@ -363,9 +382,15 @@ if zplug check "b4b4r07/zsh-history-enhanced"; then
     ZSH_HISTORY_KEYBIND_GET_ALL="^r^a"
 fi
 
+if zplug check "vifon/deer"; then
+	zle -N deer
+	bindkey '\ek' deer
+fi
+
 if zplug check "bhilburn/powerlevel9k"; then
     # Easily switch primary foreground/background colors
-    DEFAULT_FOREGROUND=006 DEFAULT_BACKGROUND=235
+    DEFAULT_FOREGROUND=006
+    DEFAULT_BACKGROUND=235
     DEFAULT_COLOR=$DEFAULT_FOREGROUND
 
     # powerlevel9k prompt theme
@@ -388,7 +413,7 @@ if zplug check "bhilburn/powerlevel9k"; then
     POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND="$DEFAULT_BACKGROUND"
 
     POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR="\uE0B4"
-    POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR="%F{$(( $DEFAULT_BACKGROUND - 2 ))}|%f"
+	POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR="%F{$(( $DEFAULT_BACKGROUND - 2 ))}|%f"
     POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR="\uE0B6"
     POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR="%F{$(( $DEFAULT_BACKGROUND - 2 ))}|%f"
 
@@ -399,8 +424,9 @@ if zplug check "bhilburn/powerlevel9k"; then
     POWERLEVEL9K_STATUS_CROSS=true
     POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
-    POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{248}\u256D\u2500%f"
-    POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{248}\u2570%F{248}\uF0DA%F{244}\uF0DA%F{240}\uF0DA%f "
+    POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{cyan}\u256D\u2500%f"
+    #POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{cyan}\u2570%F{255}\uF460%F{250}\uF460%F{245}\uF460%f "
+    POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{cyan}\u2570%F{255}\uF0DA%F{250}\uF0DA%F{245}\uF0DA%f "
     #POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="╭─%f"
     #POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="╰─%F{008}\uF460 %f"
     #POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
@@ -441,7 +467,7 @@ if zplug check "bhilburn/powerlevel9k"; then
     POWERLEVEL9K_STATUS_ERROR_FOREGROUND="$DEFAULT_FOREGROUND"
     POWERLEVEL9K_STATUS_ERROR_FOREGROUND="red"
     POWERLEVEL9K_STATUS_ERROR_BACKGROUND="$DEFAULT_BACKGROUND"
-    POWERLEVEL9K_STATUS_ERROR_BACKGROUND="$(( $DEFAULT_BACKGROUND + 2 ))"
+    POWERLEVEL9K_STATUS_ERROR_BACKGROUND="$(( $DEFAULT_BACKGROUND + 3 ))"
 
     POWERLEVEL9K_HISTORY_FOREGROUND="$DEFAULT_FOREGROUND"
 
@@ -456,9 +482,8 @@ if zplug check "bhilburn/powerlevel9k"; then
     POWERLEVEL9K_VCS_GIT_ICON=""
 
     POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND="246"
-    POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND="$DEFAULT_BACKGROUND + 5 "
-    #POWERLEVEL9K_EXECUTION_TIME_ICON="\u23F1"
-	POWERLEVEL9K_EXECUTION_TIME_ICON="\uF253"
+    POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND="$(( $DEFAULT_BACKGROUND + 5 ))"
+    POWERLEVEL9K_EXECUTION_TIME_ICON="\uF253"
 
     POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=2
     #POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=0
@@ -492,10 +517,8 @@ if zplug check "bhilburn/powerlevel9k"; then
     POWERLEVEL9K_HOST_REMOTE_FOREGROUND="$DEFAULT_FOREGROUND"
     POWERLEVEL9K_HOST_REMOTE_BACKGROUND="$DEFAULT_BACKGROUND"
 
-    POWERLEVEL9K_HOST_ICON_FOREGROUND="$DEFAULT_FOREGROUND"
-    POWERLEVEL9K_HOST_ICON_BACKGROUND="$DEFAULT_BACKGROUND"
     POWERLEVEL9K_HOST_ICON="\uF197" # 
-	 POWERLEVEL9K_HOST_TEMPLATE=""
+    POWERLEVEL9K_HOST_TEMPLATE=""
 
     POWERLEVEL9K_OS_ICON_FOREGROUND="$DEFAULT_FOREGROUND"
     POWERLEVEL9K_OS_ICON_BACKGROUND="$DEFAULT_BACKGROUND"
@@ -519,11 +542,6 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load
 
-[ -d "$HOME/bin" ] && export PATH="$HOME/bin:$PATH"
-[ -d "/Applications/Araxis\ Merge.app/Contents/Utilities" ] && export PATH="$PATH:/Applications/Araxis\ Merge.app/Contents/Utilities"
-[ -d "$HOME/Library/Android/sdk/platform-tools" ] && export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
-[ -d "$HOME/Library/Python/3.6/bin" ] && export PATH="$PATH:$HOME/Library/Python/3.6/bin"
-
 # Source defined functions.
 [[ -f ~/.zsh_functions ]] && source ~/.zsh_functions
 
@@ -534,13 +552,20 @@ zplug load
 [[ -f ~/.zsh_exports ]] && source ~/.zsh_exports
 [[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases
 
+# Add junk to path that I probably don't need
+[ -d "$HOME/bin" ] && export PATH="$HOME/bin:$PATH"
+[ -d "/Applications/Araxis\ Merge.app/Contents/Utilities" ] && export PATH="$PATH:/Applications/Araxis\ Merge.app/Contents/Utilities"
+[ -d "$HOME/Library/Android/sdk/platform-tools" ] && export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
+[ -d "$HOME/Library/Python/3.6/bin" ] && export PATH="$PATH:$HOME/Library/Python/3.6/bin"
+[ -d "/usr/local/opt/go/libexec/bin" ] && export PATH="$PATH:/usr/local/opt/go/libexec/bin"
+[ -d "$HOME/go/bin" ] && export PATH="$PATH:$HOME/go/bin"
+
 # Load NVM
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
+# Other things
 eval "$(hub alias -s)"
 eval "$(jump shell)"
 
 source ~/.lenvrc
-
-#fpath=(/usr/local/share/zsh-completions $fpath)
