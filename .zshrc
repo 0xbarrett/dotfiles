@@ -44,8 +44,40 @@ function build() {
     make -f $1 -j8 RELEASE=N DEBUG=Y $2
 }
 
-manp() {
+function manp() {
     man -t "$@" | open -f -a Preview;
+}
+
+function colorgrid() {
+    iter=16
+    while [ $iter -lt 52 ]
+    do
+        second=$[$iter+36]
+        third=$[$second+36]
+        four=$[$third+36]
+        five=$[$four+36]
+        six=$[$five+36]
+        seven=$[$six+36]
+        if [ $seven -gt 250 ];then seven=$[$seven-251]; fi
+
+        echo -en "\033[38;5;$(echo $iter)m█ "
+        printf "%03d" $iter
+        echo -en "   \033[38;5;$(echo $second)m█ "
+        printf "%03d" $second
+        echo -en "   \033[38;5;$(echo $third)m█ "
+        printf "%03d" $third
+        echo -en "   \033[38;5;$(echo $four)m█ "
+        printf "%03d" $four
+        echo -en "   \033[38;5;$(echo $five)m█ "
+        printf "%03d" $five
+        echo -en "   \033[38;5;$(echo $six)m█ "
+        printf "%03d" $six
+        echo -en "   \033[38;5;$(echo $seven)m█ "
+        printf "%03d" $seven
+
+        iter=$[$iter+1]
+        printf '\r\n'
+    done
 }
 
 # =============================================================================
@@ -238,6 +270,8 @@ alias which="type -a"
 alias cx="chmod +x"
 alias make="make -j8"
 alias please='sudo $(fc -ln -1)'
+alias cls="colorls"
+alias clsa="colorls -al"
 
 # Remove .DS_Store files from current directory, recursively
 alias rmds="find . -name '*.DS_Store' -type f -delete"
@@ -391,6 +425,7 @@ if zplug check "bhilburn/powerlevel9k"; then
     # Easily switch primary foreground/background colors
     DEFAULT_FOREGROUND=006
     DEFAULT_BACKGROUND=235
+    DEFAULT_ACCENT=015
     DEFAULT_COLOR=$DEFAULT_FOREGROUND
 
     # powerlevel9k prompt theme
@@ -424,9 +459,13 @@ if zplug check "bhilburn/powerlevel9k"; then
     POWERLEVEL9K_STATUS_CROSS=true
     POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
+    FIRST_ARROW_COLOR=$DEFAULT_ACCENT
+    SECOND_ARROW_COLOR=245
+    THIRD_ARROW_COLOR=243
+
     POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{cyan}\u256D\u2500%f"
     #POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{cyan}\u2570%F{255}\uF460%F{250}\uF460%F{245}\uF460%f "
-    POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{cyan}\u2570%F{255}\uF0DA%F{250}\uF0DA%F{245}\uF0DA%f "
+    POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{cyan}\u2570%F{$FIRST_ARROW_COLOR}\uF0DA%F{$SECOND_ARROW_COLOR}\uF0DA%F{$THIRD_ARROW_COLOR}\uF0DA%f "
     #POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="╭─%f"
     #POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="╰─%F{008}\uF460 %f"
     #POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
@@ -512,7 +551,7 @@ if zplug check "bhilburn/powerlevel9k"; then
     POWERLEVEL9K_SSH_BACKGROUND="$(( $DEFAULT_BACKGROUND - 2 ))"
     POWERLEVEL9K_SSH_ICON="\uF489"  # 
 
-    POWERLEVEL9K_HOST_LOCAL_FOREGROUND="$DEFAULT_FOREGROUND"
+    POWERLEVEL9K_HOST_LOCAL_FOREGROUND="$DEFAULT_ACCENT"
     POWERLEVEL9K_HOST_LOCAL_BACKGROUND="$DEFAULT_BACKGROUND"
     POWERLEVEL9K_HOST_REMOTE_FOREGROUND="$DEFAULT_FOREGROUND"
     POWERLEVEL9K_HOST_REMOTE_BACKGROUND="$DEFAULT_BACKGROUND"
@@ -541,6 +580,9 @@ fi
 
 # Then, source plugins and add commands to $PATH
 zplug load
+
+# Gruvbox colors
+[[ -f ~/dotfiles/gruvbox_256palette_osx.sh ]] && source ~/dotfiles/gruvbox_256palette_osx.sh
 
 # Source defined functions.
 [[ -f ~/.zsh_functions ]] && source ~/.zsh_functions
