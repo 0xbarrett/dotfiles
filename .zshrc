@@ -1,6 +1,6 @@
 # Path to oh-my-zsh installation.
 export ZSH="/Users/barrettbrown/.oh-my-zsh"
-
+export TERM="xterm-256color"
 # =============================================================================
 #                                   Functions
 # =============================================================================
@@ -272,6 +272,8 @@ alias make="make -j8"
 alias please='sudo $(fc -ln -1)'
 alias cls="colorls"
 alias clsa="colorls -al"
+alias tig="tig --all"
+alias tm="tmux -2"
 
 # Remove .DS_Store files from current directory, recursively
 alias rmds="find . -name '*.DS_Store' -type f -delete"
@@ -492,13 +494,13 @@ if zplug check "bhilburn/powerlevel9k"; then
     POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND="magenta"
     POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND="$DEFAULT_BACKGROUND"
 
-    POWERLEVEL9K_DIR_HOME_BACKGROUND="$DEFAULT_FOREGROUND"
+    POWERLEVEL9K_DIR_HOME_BACKGROUND="$GRUVBOX_FG2"
     POWERLEVEL9K_DIR_HOME_FOREGROUND="$DEFAULT_BACKGROUND"
-    POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="$DEFAULT_FOREGROUND"
+    POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="$GRUVBOX_FG2"
     POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="$DEFAULT_BACKGROUND"
-    POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="$DEFAULT_FOREGROUND"
+    POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="$GRUVBOX_FG2"
     POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="$DEFAULT_BACKGROUND"
-    POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND="$DEFAULT_FOREGROUND"
+    POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND="$GRUVBOX_FG2"
     POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND="$DEFAULT_BACKGROUND"
 
     POWERLEVEL9K_STATUS_OK_FOREGROUND="$DEFAULT_FOREGROUND"
@@ -557,7 +559,8 @@ if zplug check "bhilburn/powerlevel9k"; then
     POWERLEVEL9K_HOST_REMOTE_FOREGROUND="$GRUVBOX_FG2"
     POWERLEVEL9K_HOST_REMOTE_BACKGROUND="$GRUVBOX_BG1"
 
-    POWERLEVEL9K_HOST_ICON="\uF197"
+    #POWERLEVEL9K_HOST_ICON="\uF197"
+    POWERLEVEL9K_HOST_ICON="\uf68c"
     POWERLEVEL9K_HOST_TEMPLATE=""
 
     POWERLEVEL9K_OS_ICON_FOREGROUND="$DEFAULT_FOREGROUND"
