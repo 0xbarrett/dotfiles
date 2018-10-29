@@ -19,14 +19,14 @@
     enable_guicolors = true
     # Disable statusline separator, if you want to use other value, please
     # install nerd fonts
-    statusline_separator = "arrow"
-    statusline_inactive_separator = "arrow"
+    statusline_separator = "fire"
+    statusline_inactive_separator = "fire"
     buffer_index_type = 4
     enable_tabline_filetype_icon = true
     enable_statusline_display_mode = false
     bootstrap_after = "myspacevim#after"
     filemanager = "nerdtree"
-     
+
 # Enable autocomplete layer
 [[layers]]
 name = 'autocomplete'
@@ -57,4 +57,3 @@ name = "ui"
   name = "lilydjwg/colorizer"
   on_cmd = ["ColorHighlight", "ColorToggle"]
   merged = 0
-

@@ -1,13 +1,23 @@
 #!/usr/bin/env zsh
+print ~
+[[ ! -d ~/.config ]] && mkdir ~/.config
 
-ln -f .zshrc $HOME/.zshrc
-ln -f .gitconfig $HOME/.gitconfig
-ln -f .zsh_aliases $HOME/.zsh_aliases
-ln -f .tigrc $HOME/.tigrc
+# zsh
+ln -f ./zsh/.zshrc ~/.zshrc
+ln -f ./zsh/.zsh_aliases ~/.zsh_aliases
+ln -f ./zsh/zlogin.zsh ~/.zlogin
 
-[[ ! -d $HOME/.config ]] && mkdir $HOME/.config
-[[ ! -d $HOME/.config/nvim ]] && mkdir $HOME/.config/nvim
-ln -f ./.config/nvim/init.vim $HOME/.config/nvim/init.vim
+# git
+ln -f ./git/.gitconfig ~/.gitconfig
+ln -f ./git/.gitignore_global ~/.gitignore_global
 
-[[ ! -d $HOME/.SpaceVim.d ]] && mkdir $HOME/.SpaceVim.d
-ln -f ./.SpaceVim.d/init.toml $HOME/.SpaceVim.d/init.toml
+#tig
+ln -f ./tig/.tigrc ~/.tigrc
+
+# vim
+[[ ! -d ~/.config/nvim ]] && mkdir ~/.config/nvim
+ln -f ./nvim/init.vim ~/.config/nvim/init.vim
+[[ ! -d ~/.SpaceVim.d ]] && mkdir ~/.SpaceVim.d
+ln -f ./spacevim/init.toml ~/.SpaceVim.d/init.toml
+
+ln -f ./gruvbox_256palette_osx.sh ~/.config/
