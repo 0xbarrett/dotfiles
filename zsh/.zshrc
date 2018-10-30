@@ -476,6 +476,10 @@ if zplug check "vifon/deer"; then
     bindkey '\ek' deer
 fi
 
+if zplug check "zsh-users/zsh-autosuggestions"; then
+    bindkey '^ ' autosuggest-accept
+fi
+
 if zplug check "bhilburn/powerlevel9k"; then
     #gruvbox colors
     GRUVBOX_FG0=229
