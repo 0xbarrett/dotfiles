@@ -145,7 +145,7 @@ export ENHANCD_FILTER="fzf:peco:percol"
 export ENHANCD_COMMAND='c'
 
 export SSH_KEY_PATH="~/.ssh/id_rsa"
-export JAVA_HOME="$(/usr/libexec/java_home)"
+[[ -e /usr/libexec/java_home ]] && export JAVA_HOME="$(/usr/libexec/java_home)"
 export BAT_THEME="DarkNeon"
 export NVM_DIR="$HOME/.nvm"
 export GOPATH="$HOME/go"
