@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-print ~
+
 [[ ! -d ~/.config ]] && mkdir ~/.config
 
 # zsh

@@ -1,6 +1,7 @@
 # Path to oh-my-zsh installation.
 export ZSH="/Users/barrettbrown/.oh-my-zsh"
 export TERM="xterm-256color"
+
 # =============================================================================
 #                                   Functions
 # =============================================================================
@@ -261,10 +262,6 @@ zplug "zsh-users/zsh-history-substring-search", defer:3
 # improved less option
 export LESS="--tabs=4 --no-init --LONG-PROMPT --ignore-case --quit-if-one-screen --RAW-CONTROL-CHARS"
 
-# Key timeout and character sequences
-#KEYTIMEOUT=1
-#WORDCHARS='*?_-[]~=./&;!#$%^(){}<>'
-
 #set the max number of open files to 1024
 ulimit -S -n 1024
 
@@ -302,10 +299,6 @@ bindkey "^[[3~" delete-char
 #                                   Aliases
 # =============================================================================
 
-# In the definitions below, you will see use of function definitions instead of
-# aliases for some cases. We use this method to avoid expansion of the alias in
-# combination with the globalias plugin.
-
 # Directory coloring
 export CLICOLOR="YES" # Equivalent to passing -G to ls.
 export LSCOLORS="exgxdHdHcxaHaHhBhDeaec"
@@ -334,11 +327,13 @@ alias rmds="find . -name '*.DS_Store' -type f -delete"
 # Additional git aliases
 alias gsup="git sup"
 alias gbcu="git bcu"
+alias gbcup="gbcu"
 alias gtree="git tree"
 alias gopr="open-pr develop"
 alias gdtl="git difftool --no-prompt"
 alias gprl="git pr list --state=all --limit=10 -f \"%sC%>(8)%i%Creset $(print "\ue725") %<(40)%t %Cblue%U%n\""
 alias gprc="hub pull-request -o -c"
+alias gre="git recent"
 
 alias re-source='source ~/.zshrc'
 alias wch='type -a'
@@ -376,6 +371,10 @@ zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
 # =============================================================================
 
 zstyle ':completion:*' rehash true
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*:kill:*'   force-list always
 #zstyle ':completion:*' verbose yes
 #zstyle ':completion:*:descriptions' format '%B%d%b'
 #zstyle ':completion:*:messages' format '%d'
@@ -662,6 +661,7 @@ zplug load
 [ -d "$HOME/Library/Python/3.6/bin" ] && export PATH="$PATH:$HOME/Library/Python/3.6/bin"
 [ -d "/usr/local/opt/go/libexec/bin" ] && export PATH="$PATH:/usr/local/opt/go/libexec/bin"
 [ -d "$HOME/go/bin" ] && export PATH="$PATH:$HOME/go/bin"
+[ -d "/usr/local/sbin" ] && export PATH="$PATH:/usr/local/sbin"
 
 # Load NVM
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -670,5 +670,4 @@ zplug load
 # Other things
 eval "$(hub alias -s)"
 eval "$(jump shell)"
-
 source ~/.lenvrc
