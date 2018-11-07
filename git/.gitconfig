@@ -54,9 +54,6 @@
 [apply]
 	whitespace = warn
 
-[credential]
-	helper = osxkeychain
-
 [http "https://github.appl.ge.com"]
 	proxy =
 
