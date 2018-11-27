@@ -141,13 +141,13 @@ export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border --inline-info --color=dark,bg+:235,hl+:10,pointer:5'
-
 export ENHANCD_FILTER="fzf:peco:percol"
 export ENHANCD_COMMAND='c'
+export HUB_PROTOCOL=https
 
-export SSH_KEY_PATH="~/.ssh/id_rsa"
+export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 [[ -e /usr/libexec/java_home ]] && export JAVA_HOME="$(/usr/libexec/java_home)"
-export BAT_THEME="DarkNeon"
+export BAT_THEME="Monokai Extended Bright"
 export NVM_DIR="$HOME/.nvm"
 export GOPATH="$HOME/go"
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -331,7 +331,8 @@ alias gbcup="gbcu"
 alias gtree="git tree"
 alias gopr="open-pr develop"
 alias gdtl="git difftool --no-prompt"
-alias gprl="git pr list --state=all --limit=10 -f \"%sC%>(8)%i%Creset $(print "\ue725") %<(40)%t %Cblue%U%n\""
+alias gprl="git pr list --state=all --limit=10 -f \"%sC%>(8)%i%Creset %<(40)%t %Cyellow$(print "\ue725") %<(35)%H %Cblue%U%n\""
+alias gprls="git pr list --state=all --limit=10 -f \"%sC%>(8)%i%Creset $(print "\ue725") %<(50)%t %Cblue%U%n\""
 alias gprc="hub pull-request -o -c"
 alias gre="git recent"
 
