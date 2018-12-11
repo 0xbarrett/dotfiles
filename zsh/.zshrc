@@ -146,6 +146,7 @@ export ENHANCD_COMMAND='c'
 export HUB_PROTOCOL=https
 
 export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
+
 [[ -e /usr/libexec/java_home ]] && export JAVA_HOME="$(/usr/libexec/java_home)"
 export BAT_THEME="Monokai Extended Bright"
 export NVM_DIR="$HOME/.nvm"
@@ -616,8 +617,8 @@ if zplug check "bhilburn/powerlevel9k"; then
     POWERLEVEL9K_HOST_REMOTE_FOREGROUND="$GRUVBOX_FG2"
     POWERLEVEL9K_HOST_REMOTE_BACKGROUND="$GRUVBOX_BG1"
 
-    #POWERLEVEL9K_HOST_ICON="\uF197"
-    POWERLEVEL9K_HOST_ICON="\uf68c"
+    POWERLEVEL9K_HOST_ICON="\uF197"
+    #POWERLEVEL9K_HOST_ICON="\uf6f5"
     POWERLEVEL9K_HOST_TEMPLATE=""
 
     POWERLEVEL9K_OS_ICON_FOREGROUND="$DEFAULT_FOREGROUND"
@@ -663,6 +664,7 @@ zplug load
 [ -d "/usr/local/opt/go/libexec/bin" ] && export PATH="$PATH:/usr/local/opt/go/libexec/bin"
 [ -d "$HOME/go/bin" ] && export PATH="$PATH:$HOME/go/bin"
 [ -d "/usr/local/sbin" ] && export PATH="$PATH:/usr/local/sbin"
+[ -d "/usr/local/lib/ruby/gems/2.5.0/bin" ] && export PATH="$PATH:/usr/local/lib/ruby/gems/2.5.0/bin"
 
 # Load NVM
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -672,3 +674,5 @@ zplug load
 eval "$(hub alias -s)"
 eval "$(jump shell)"
 source ~/.lenvrc
+
+export PATH=/Users/barrettbrown/.local/bin:$PATH
