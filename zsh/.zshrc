@@ -319,7 +319,7 @@ alias make="make -j8"
 alias please='sudo $(fc -ln -1)'
 alias cls="colorls"
 alias clsa="colorls -al"
-alias tig="tig --all"
+alias tiga="tig --all"
 alias tm="tmux -2"
 
 # Remove .DS_Store files from current directory, recursively
@@ -351,7 +351,7 @@ alias lk='ls -lSr'         # Sort by size, biggest last
 alias lc='ls -ltcr'        # Sort by and show change time, most recent last
 alias lu='ls -ltur'        # Sort by and show access time, most recent last
 alias lt='ls -ltr'         # Sort by date, most recent last
-alias lr='ls -lR'          # Recursive ls
+alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less' # Full recursive directory listing
 
 alias d='dirs -v'
 alias 1='pu'
@@ -666,13 +666,14 @@ zplug load
 [ -d "/usr/local/sbin" ] && export PATH="$PATH:/usr/local/sbin"
 [ -d "/usr/local/lib/ruby/gems/2.5.0/bin" ] && export PATH="$PATH:/usr/local/lib/ruby/gems/2.5.0/bin"
 
-# Load NVM
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
 # Other things
 eval "$(hub alias -s)"
 eval "$(jump shell)"
 source ~/.lenvrc
 
-export PATH=/Users/barrettbrown/.local/bin:$PATH
+PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
+
+# Load NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
