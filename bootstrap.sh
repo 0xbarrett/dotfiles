@@ -1,23 +1,24 @@
 #!/usr/bin/env zsh
+CUR_DIR=`pwd`
 
-[[ ! -d ~/.config ]] && mkdir ~/.config
+[[ ! -d ~/.config ]] && mkdir $HOME/.config
 
 # zsh
-ln -f ./zsh/.zshrc ~/.zshrc
-ln -f ./zsh/.zsh_aliases ~/.zsh_aliases
-ln -f ./zsh/zlogin.zsh ~/.zlogin
+ln -sf $CUR_DIR/zsh/.zshrc $HOME/.zshrc
+ln -sf $CUR_DIR/zsh/.zsh_aliases $HOME/.zsh_aliases
+ln -sf $CUR_DIR/zsh/zlogin.zsh $HOME/.zlogin
 
 # git
-ln -f ./git/.gitconfig ~/.gitconfig
-ln -f ./git/.gitignore_global ~/.gitignore_global
+ln -sf $CUR_DIR/git/.gitconfig $HOME/.gitconfig
+ln -sf $CUR_DIR/git/.gitignore_global $HOME/.gitignore_global
 
 #tig
-ln -f ./tig/.tigrc ~/.tigrc
+ln -sf $CUR_DIR/tig/.tigrc $HOME/.tigrc
 
 # vim
-[[ ! -d ~/.config/nvim ]] && mkdir ~/.config/nvim
-ln -f ./nvim/init.vim ~/.config/nvim/init.vim
-[[ ! -d ~/.SpaceVim.d ]] && mkdir ~/.SpaceVim.d
-ln -f ./spacevim/init.toml ~/.SpaceVim.d/init.toml
+[[ ! -d $HOME/.config/nvim ]] && mkdir $HOME/.config/nvim
+ln -sf $CUR_DIR/nvim/init.vim $HOME/.config/nvim/init.vim
+[[ ! -d $HOME/.SpaceVim.d ]] && mkdir $HOME/.SpaceVim.d
+ln -sf $CUR_DIR/spacevim/init.toml $HOME/.SpaceVim.d/init.toml
 
-ln -f ./gruvbox_256palette_osx.sh ~/.config/
+ln -sf $CUR_DIR/gruvbox_256palette_osx.sh $HOME/.config/

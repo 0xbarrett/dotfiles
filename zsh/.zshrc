@@ -149,7 +149,6 @@ export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 
 [[ -e /usr/libexec/java_home ]] && export JAVA_HOME="$(/usr/libexec/java_home)"
 export BAT_THEME="Monokai Extended Bright"
-export NVM_DIR="$HOME/.nvm"
 export GOPATH="$HOME/go"
 export XDG_CONFIG_HOME="$HOME/.config"
 
@@ -204,10 +203,10 @@ zplug "vifon/deer", use:deer
 # Load theme
 zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 
-zplug "plugins/common-aliases",    from:oh-my-zsh
+#zplug "plugins/common-aliases",    from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/colorize",          from:oh-my-zsh
-zplug "plugins/command-not-found", from:oh-my-zsh
+#zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/copydir",           from:oh-my-zsh
 zplug "plugins/copyfile",          from:oh-my-zsh
 zplug "plugins/cp",                from:oh-my-zsh
@@ -260,8 +259,8 @@ zplug "zsh-users/zsh-history-substring-search", defer:3
 #                                   Options
 # =============================================================================
 
-# improved less option
 export LESS="--tabs=4 --no-init --LONG-PROMPT --ignore-case --quit-if-one-screen --RAW-CONTROL-CHARS"
+export LESSOPEN="| bat %s 2>/dev/null" # Use `bat` program to syntax-wise highlight files.
 
 #set the max number of open files to 1024
 ulimit -S -n 1024
@@ -284,10 +283,11 @@ setopt hist_save_no_dups        # Omit older commands in favor of newer ones.
 setopt hist_ignore_space        # Ignore commands that start with space.
 
 # Changing directories
-#setopt auto_pushd
+setopt auto_pushd
 setopt pushd_ignore_dups        # Dont push copies of the same dir on stack.
 setopt pushd_minus              # Reference stack entries with "-".
 
+setopt long_list_jobs
 setopt extended_glob
 
 # =============================================================================
@@ -336,6 +336,7 @@ alias gprl="git pr list --state=all --limit=10 -f \"%sC%>(8)%i%Creset %<(40)%t %
 alias gprls="git pr list --state=all --limit=10 -f \"%sC%>(8)%i%Creset $(print "\ue725") %<(50)%t %Cblue%U%n\""
 alias gprc="hub pull-request -o -c"
 alias gre="git recent"
+alias gmpr="git mpr"
 
 alias re-source='source ~/.zshrc'
 alias wch='type -a'
@@ -345,7 +346,7 @@ alias lal='ls -al'
 alias ld='ls -ld'          # Show info about the directory
 alias lla='ls -lAF'        # Show hidden all files
 alias ll='ls -lF'          # Show long file information
-alias la='ls -AF'          # Show hidden files
+alias la='ls -lAFh'        # #long list,show almost all,show type,human readable
 alias lx='ls -lXB'         # Sort by extension
 alias lk='ls -lSr'         # Sort by size, biggest last
 alias lc='ls -ltcr'        # Sort by and show change time, most recent last
@@ -375,6 +376,7 @@ zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
 zstyle ':completion:*' rehash true
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
+zstyle ':completion:*' menu select # Use completion menu for completion when available.
 zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:kill:*'   force-list always
 #zstyle ':completion:*' verbose yes
@@ -664,16 +666,15 @@ zplug load
 [ -d "/usr/local/opt/go/libexec/bin" ] && export PATH="$PATH:/usr/local/opt/go/libexec/bin"
 [ -d "$HOME/go/bin" ] && export PATH="$PATH:$HOME/go/bin"
 [ -d "/usr/local/sbin" ] && export PATH="$PATH:/usr/local/sbin"
-[ -d "/usr/local/lib/ruby/gems/2.5.0/bin" ] && export PATH="$PATH:/usr/local/lib/ruby/gems/2.5.0/bin"
+[ -d "/usr/local/lib/ruby/gems/2.6.0/bin" ] && export PATH="$PATH:/usr/local/lib/ruby/gems/2.6.0/bin"
 
 # Other things
 eval "$(hub alias -s)"
 eval "$(jump shell)"
-source ~/.lenvrc
 
+# Load asdf
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
+
+# Remove duplicate entries in PATH
 PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
-
-# Load NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
