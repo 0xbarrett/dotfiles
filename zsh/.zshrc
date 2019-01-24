@@ -312,7 +312,6 @@ alias vim='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
 # Custom helper aliases
 alias cp="cp -iv"
 alias mv="mv -iv"
-alias rm='rm -v'
 alias which="type -a"
 alias cx="chmod +x"
 alias make="make -j8"
@@ -662,6 +661,7 @@ zplug load
 [ -d "$HOME/bin" ] && export PATH="$HOME/bin:$PATH"
 [ -d "/Applications/Araxis\ Merge.app/Contents/Utilities" ] && export PATH="$PATH:/Applications/Araxis\ Merge.app/Contents/Utilities"
 [ -d "$HOME/Library/Android/sdk/platform-tools" ] && export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
+[ -d "$HOME/Library/Python/2.7/bin" ] && export PATH="$PATH:$HOME/Library/Python/2.7/bin"
 [ -d "$HOME/Library/Python/3.6/bin" ] && export PATH="$PATH:$HOME/Library/Python/3.6/bin"
 [ -d "/usr/local/opt/go/libexec/bin" ] && export PATH="$PATH:/usr/local/opt/go/libexec/bin"
 [ -d "$HOME/go/bin" ] && export PATH="$PATH:$HOME/go/bin"
