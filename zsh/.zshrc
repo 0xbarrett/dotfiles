@@ -1,5 +1,3 @@
-# Path to oh-my-zsh installation.
-export ZSH="/Users/barrettbrown/.oh-my-zsh"
 export TERM="xterm-256color"
 
 # =============================================================================
@@ -137,17 +135,16 @@ function fs() {
 # =============================================================================
 #                                   Variables
 # =============================================================================
+[[ -e /usr/libexec/java_home ]] && export JAVA_HOME="$(/usr/libexec/java_home)"
+
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
-
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border --inline-info --color=dark,bg+:235,hl+:10,pointer:5'
+export CLICOLOR="YES" # Equivalent to passing -G to ls.
+export LSCOLORS="exgxdHdHcxaHaHhBhDeaec"
 export ENHANCD_FILTER="fzf:peco:percol"
 export ENHANCD_COMMAND='c'
 export HUB_PROTOCOL=https
-
-export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
-
-[[ -e /usr/libexec/java_home ]] && export JAVA_HOME="$(/usr/libexec/java_home)"
 export BAT_THEME="Monokai Extended Bright"
 export GOPATH="$HOME/go"
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -172,7 +169,6 @@ source ~/.zplug/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 # Miscellaneous commands
-#zplug "andrewferrier/fzf-z"
 zplug "k4rthik/git-cal",  as:command
 zplug "peco/peco",        as:command, from:gh-r
 zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf, \
@@ -221,6 +217,9 @@ zplug "plugins/history",           from:oh-my-zsh
 #zplug "plugins/z",                 from:oh-my-zsh
 #zplug "plugins/fancy-ctrl-z",      from:oh-my-zsh
 zplug "MichaelAquilina/zsh-emojis"
+zplug "b4b4r07/httpstat", as:command, use:'(*).sh', rename-to:'$1'
+zplug "caarlos0/open-pr"
+zplug "MikeDacre/careful_rm"
 
 if [[ $OSTYPE = (darwin)* ]]; then
     zplug "lib/clipboard",         from:oh-my-zsh
@@ -229,6 +228,7 @@ if [[ $OSTYPE = (darwin)* ]]; then
 fi
 
 zplug "plugins/git",               from:oh-my-zsh, if:"(( $+commands[git] ))"
+zplug 'wfxr/forgit'
 #zplug "plugins/golang",            from:oh-my-zsh, if:"(( $+commands[go] ))"
 #zplug "plugins/svn",               from:oh-my-zsh, if:"(( $+commands[svn] ))"
 #zplug "plugins/node",              from:oh-my-zsh, if:"(( $+commands[node] ))"
@@ -244,15 +244,14 @@ zplug "plugins/gpg-agent",         from:oh-my-zsh, if:"(( $+commands[gpg-agent] 
 #zplug "plugins/docker",            from:oh-my-zsh, if:"(( $+commands[docker] ))"
 #zplug "plugins/docker-compose",    from:oh-my-zsh, if:"(( $+commands[docker-compose] ))"
 
-#zplug "djui/alias-tips"
 zplug "hlissner/zsh-autopair", defer:2
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
-zplug "caarlos0/open-pr"
 
 # zsh-syntax-highlighting must be loaded after executing compinit command
 # and sourcing other plugins
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
+#zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zdharma/fast-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search", defer:3
 
 # =============================================================================
@@ -290,6 +289,8 @@ setopt pushd_minus              # Reference stack entries with "-".
 setopt long_list_jobs
 setopt extended_glob
 
+setopt notify	                # Report the status of backgrounds jobs immediately
+
 # =============================================================================
 #                                   Keybindings
 # =============================================================================
@@ -299,10 +300,6 @@ bindkey "^[[3~" delete-char
 # =============================================================================
 #                                   Aliases
 # =============================================================================
-
-# Directory coloring
-export CLICOLOR="YES" # Equivalent to passing -G to ls.
-export LSCOLORS="exgxdHdHcxaHaHhBhDeaec"
 
 # Generic command adaptations
 alias grep='() { $(whence -p grep) --color=auto $@ }'
@@ -480,6 +477,17 @@ fi
 
 if zplug check "zsh-users/zsh-autosuggestions"; then
     bindkey '^ ' autosuggest-accept
+    ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+fi
+
+if zplug check "wfxr/forgit"; then
+    forgit_log=gli
+    forgit_diff=gdi
+    forgit_add=gai
+    forgit_ignore=gii
+    forgit_restore=
+    forgit_clean=
+    forgit_stash_show=gsti
 fi
 
 if zplug check "bhilburn/powerlevel9k"; then
@@ -614,9 +622,9 @@ if zplug check "bhilburn/powerlevel9k"; then
     POWERLEVEL9K_SSH_ICON="\uF489"
 
     POWERLEVEL9K_HOST_LOCAL_FOREGROUND="$GRUVBOX_FG2"
-    POWERLEVEL9K_HOST_LOCAL_BACKGROUND="$GRUVBOX_BG1"
+    POWERLEVEL9K_HOST_LOCAL_BACKGROUND="$GRUVBOX_BG0"
     POWERLEVEL9K_HOST_REMOTE_FOREGROUND="$GRUVBOX_FG2"
-    POWERLEVEL9K_HOST_REMOTE_BACKGROUND="$GRUVBOX_BG1"
+    POWERLEVEL9K_HOST_REMOTE_BACKGROUND="$GRUVBOX_BG0"
 
     POWERLEVEL9K_HOST_ICON="\uF197"
     #POWERLEVEL9K_HOST_ICON="\uf6f5"
@@ -662,7 +670,7 @@ zplug load
 [ -d "/Applications/Araxis\ Merge.app/Contents/Utilities" ] && export PATH="$PATH:/Applications/Araxis\ Merge.app/Contents/Utilities"
 [ -d "$HOME/Library/Android/sdk/platform-tools" ] && export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
 [ -d "$HOME/Library/Python/2.7/bin" ] && export PATH="$PATH:$HOME/Library/Python/2.7/bin"
-[ -d "$HOME/Library/Python/3.6/bin" ] && export PATH="$PATH:$HOME/Library/Python/3.6/bin"
+[ -d "$HOME/Library/Python/3.7/bin" ] && export PATH="$PATH:$HOME/Library/Python/3.7/bin"
 [ -d "/usr/local/opt/go/libexec/bin" ] && export PATH="$PATH:/usr/local/opt/go/libexec/bin"
 [ -d "$HOME/go/bin" ] && export PATH="$PATH:$HOME/go/bin"
 [ -d "/usr/local/sbin" ] && export PATH="$PATH:/usr/local/sbin"
