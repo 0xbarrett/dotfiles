@@ -675,10 +675,13 @@ zplug load
 [ -d "$HOME/go/bin" ] && export PATH="$PATH:$HOME/go/bin"
 [ -d "/usr/local/sbin" ] && export PATH="$PATH:/usr/local/sbin"
 [ -d "/usr/local/lib/ruby/gems/2.6.0/bin" ] && export PATH="$PATH:/usr/local/lib/ruby/gems/2.6.0/bin"
+[ -d "/home/linuxbrew/.linuxbrew/bin" ] && export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
 # Other things
 eval "$(hub alias -s)"
 eval "$(jump shell)"
+
+[ -e "/home/linuxbrew/.linuxbrew/bin/brew" ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 # Load asdf
 . $HOME/.asdf/asdf.sh
