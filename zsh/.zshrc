@@ -139,7 +139,8 @@ function fs() {
 
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
-export FZF_DEFAULT_OPTS='--height 40% --reverse --border --inline-info --color=dark,bg+:235,hl+:10,pointer:5'
+export FZF_DEFAULT_OPTS='--height 40% --reverse --border --inline-info --color=dark,bg+:235,hl+:10,pointer:5 --bind=j:preview-down,k:preview-up'
+export FZF_DEFAULT_COMMAND='fd --type f'
 export CLICOLOR="YES" # Equivalent to passing -G to ls.
 export LSCOLORS="exgxdHdHcxaHaHhBhDeaec"
 export ENHANCD_FILTER="fzf:peco:percol"
@@ -486,7 +487,7 @@ if zplug check "wfxr/forgit"; then
     forgit_add=gai
     forgit_ignore=gii
     forgit_restore=
-    forgit_clean=
+    forgit_clean=gci
     forgit_stash_show=gsti
 fi
 

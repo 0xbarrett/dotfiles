@@ -22,3 +22,6 @@ ln -sf $CUR_DIR/nvim/init.vim $HOME/.config/nvim/init.vim
 ln -sf $CUR_DIR/spacevim/init.toml $HOME/.SpaceVim.d/init.toml
 
 ln -sf $CUR_DIR/gruvbox_256palette_osx.sh $HOME/.config/
+
+[[ ! -d $HOME/.config/colorls ]] && mkdir $HOME/.config/colorls
+ln -sf $CUR_DIR/colorls/dark_colors.yaml $HOME/.config/colorls/dark_colors.yaml
