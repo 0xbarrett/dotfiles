@@ -1,7 +1,11 @@
 #!/usr/bin/env zsh
 CUR_DIR=`pwd`
 
-[[ ! -d ~/.config ]] && mkdir $HOME/.config
+[[ ! -d $HOME/.config ]] && mkdir $HOME/.config
+[[ ! -d $HOME/.config/colorls ]] && mkdir $HOME/.config/colorls
+[[ ! -d $HOME/.config/nvim ]] && mkdir $HOME/.config/nvim
+[[ ! -d $HOME/.SpaceVim.d ]] && mkdir $HOME/.SpaceVim.d
+[[ ! -d $HOME/.history ]] && mkdir $HOME/.history
 
 # zsh
 ln -sf $CUR_DIR/zsh/.zshrc $HOME/.zshrc
@@ -12,16 +16,16 @@ ln -sf $CUR_DIR/zsh/zlogin.zsh $HOME/.zlogin
 ln -sf $CUR_DIR/git/.gitconfig $HOME/.gitconfig
 ln -sf $CUR_DIR/git/.gitignore_global $HOME/.gitignore_global
 
-#tig
+# tig
 ln -sf $CUR_DIR/tig/.tigrc $HOME/.tigrc
 
 # vim
-[[ ! -d $HOME/.config/nvim ]] && mkdir $HOME/.config/nvim
 ln -sf $CUR_DIR/nvim/init.vim $HOME/.config/nvim/init.vim
-[[ ! -d $HOME/.SpaceVim.d ]] && mkdir $HOME/.SpaceVim.d
 ln -sf $CUR_DIR/spacevim/init.toml $HOME/.SpaceVim.d/init.toml
+
+# ruby
+ln -sf $CUR_DIR/ruby/irbrc $HOME/.irbrc
 
 ln -sf $CUR_DIR/gruvbox_256palette_osx.sh $HOME/.config/
 
-[[ ! -d $HOME/.config/colorls ]] && mkdir $HOME/.config/colorls
 ln -sf $CUR_DIR/colorls/dark_colors.yaml $HOME/.config/colorls/dark_colors.yaml
