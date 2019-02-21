@@ -43,6 +43,10 @@ function build() {
     make -f $1 -j8 RELEASE=N DEBUG=Y $2
 }
 
+function ndb() {
+    npm run build --scripts-prepend-node-path && node --inspect $1
+}
+
 function manp() {
     man -t "$@" | open -f -a Preview;
 }
@@ -334,6 +338,7 @@ alias gprls="git pr list --state=all --limit=10 -f \"%sC%>(8)%i%Creset $(print "
 alias gprc="hub pull-request -o -c"
 alias gre="git recent"
 alias gmpr="git mpr"
+alias gpc="git print-commit"
 
 alias re-source='source ~/.zshrc'
 alias wch='type -a'
@@ -650,6 +655,8 @@ if zplug check "bhilburn/powerlevel9k"; then
     POWERLEVEL9K_BATTERY_DISCONNECTED_BACKGROUND="$DEFAULT_BACKGROUND"
 fi
 
+fpath=(/usr/local/share/zsh-completions $fpath)
+
 # Then, source plugins and add commands to $PATH
 zplug load
 
@@ -678,9 +685,11 @@ zplug load
 [ -d "/usr/local/lib/ruby/gems/2.6.0/bin" ] && export PATH="$PATH:/usr/local/lib/ruby/gems/2.6.0/bin"
 [ -d "/home/linuxbrew/.linuxbrew/bin" ] && export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
+
 # Other things
 eval "$(hub alias -s)"
 eval "$(jump shell)"
+eval "$(npm completion)"
 
 [ -e "/home/linuxbrew/.linuxbrew/bin/brew" ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
