@@ -143,8 +143,9 @@ function fs() {
 
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
-export FZF_DEFAULT_OPTS='--height 40% --reverse --border --inline-info --color=dark,bg+:235,hl+:10,pointer:5 --bind=j:preview-down,k:preview-up'
-export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_DEFAULT_OPTS='--height 40% --reverse --border --inline-info --color=dark,bg+:235,hl+:10,pointer:5'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export CLICOLOR="YES" # Equivalent to passing -G to ls.
 export LSCOLORS="exgxdHdHcxaHaHhBhDeaec"
 export ENHANCD_FILTER="fzf:peco:percol"
@@ -202,7 +203,8 @@ zplug "seebi/dircolors-solarized", ignore:"*", as:plugin
 zplug "vifon/deer", use:deer
 
 # Load theme
-zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
+# zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
+zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 
 #zplug "plugins/common-aliases",    from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
@@ -233,7 +235,7 @@ if [[ $OSTYPE = (darwin)* ]]; then
 fi
 
 zplug "plugins/git",               from:oh-my-zsh, if:"(( $+commands[git] ))"
-zplug 'wfxr/forgit'
+zplug "wfxr/forgit"
 #zplug "plugins/golang",            from:oh-my-zsh, if:"(( $+commands[go] ))"
 #zplug "plugins/svn",               from:oh-my-zsh, if:"(( $+commands[svn] ))"
 #zplug "plugins/node",              from:oh-my-zsh, if:"(( $+commands[node] ))"
@@ -264,9 +266,9 @@ zplug "zsh-users/zsh-history-substring-search", defer:3
 # =============================================================================
 
 export LESS="--tabs=4 --no-init --LONG-PROMPT --ignore-case --quit-if-one-screen --RAW-CONTROL-CHARS"
-export LESSOPEN="| bat %s 2>/dev/null" # Use `bat` program to syntax-wise highlight files.
+export LESSOPEN="| bat %s 2>/dev/null" # Use `bat` to highlight files.
 
-#set the max number of open files to 1024
+# Set the max number of open files to 1024
 ulimit -S -n 1024
 
 # History
@@ -331,21 +333,19 @@ alias gsup="git sup"
 alias gbcu="git bcu"
 alias gbcup="gbcu"
 alias gtree="git tree"
-alias gopr="open-pr develop"
 alias gdtl="git difftool --no-prompt"
-alias gprl="git pr list --state=all --limit=10 -f \"%sC%>(8)%i%Creset %<(40)%t %Cyellow$(print "\ue725") %<(35)%H %Cblue%U%n\""
-alias gprls="git pr list --state=all --limit=10 -f \"%sC%>(8)%i%Creset $(print "\ue725") %<(50)%t %Cblue%U%n\""
+alias gprl="hub pr list --state=all --limit=10 -f \"%sC%>(8)%i%Creset %<(40)%t %Cyellow$(print "\ue725") %<(35)%H %Cblue%U%n\""
+alias gprls="hub pr list --state=all --limit=10 -f \"%sC%>(8)%i%Creset $(print "\ue725") %<(50)%t %Cblue%U%n\""
 alias gprc="hub pull-request -o -c"
 alias gre="git recent"
 alias gmpr="git mpr"
 alias gpc="git print-commit"
 
-alias re-source='source ~/.zshrc'
+alias src='source ~/.zshrc'
 alias wch='type -a'
 
 # Directory management
 alias lal='ls -al'
-alias ld='ls -ld'          # Show info about the directory
 alias lla='ls -lAF'        # Show hidden all files
 alias ll='ls -lF'          # Show long file information
 alias la='ls -lAFh'        # #long list,show almost all,show type,human readable
@@ -496,7 +496,7 @@ if zplug check "wfxr/forgit"; then
     forgit_stash_show=gsti
 fi
 
-if zplug check "bhilburn/powerlevel9k"; then
+if zplug check "romkatv/powerlevel10k"; then
     #gruvbox colors
     GRUVBOX_FG0=229
     GRUVBOX_FG1=223
@@ -685,9 +685,8 @@ zplug load
 [ -d "/usr/local/lib/ruby/gems/2.6.0/bin" ] && export PATH="$PATH:/usr/local/lib/ruby/gems/2.6.0/bin"
 [ -d "/home/linuxbrew/.linuxbrew/bin" ] && export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
-
 # Other things
-eval "$(hub alias -s)"
+# eval "$(hub alias -s)"
 eval "$(jump shell)"
 eval "$(npm completion)"
 
