@@ -1,0 +1,55 @@
+{
+    "editor.fontFamily": "Hack Nerd Font, Menlo, Monaco, 'Courier New', monospace",
+    "editor.renderWhitespace": "boundary",
+    "editor.tabSize": 2,
+    "editor.dragAndDrop": false,
+    "editor.renderControlCharacters": true,
+    "editor.scrollBeyondLastLine": false,
+    "editor.tabCompletion": "on",
+    "editor.fontLigatures": true,
+    "editor.minimap.enabled": false,
+    "workbench.colorTheme": "Gruvbox Dark (Soft)",
+    "C_Cpp.default.cStandard": "c99",
+    "C_Cpp.default.intelliSenseMode": "clang-x64",
+    "C_Cpp.default.cppStandard": "c++11",
+    "workbench.startupEditor": "none",
+    "workbench.statusBar.feedback.visible": false,
+    "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}",
+    "terminal.integrated.macOptionIsMeta": true,
+    "gitlens.currentLine.enabled": false,
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.hovers.enabled": false,
+    "diffEditor.ignoreTrimWhitespace": true,
+    "diffEditor.renderSideBySide": true,
+    "window.openFoldersInNewWindow": "on",
+    "window.restoreWindows": "folders",
+    "window.newWindowDimensions": "inherit",
+    "workbench.iconTheme": "material-icon-theme",
+
+    "solargraph.formatting": true,
+    "solargraph.diagnostics": true,
+    "python.pythonPath": "/usr/local/bin/python3",
+    "terminal.external.osxExec": "iterm.app",
+    "ruby.useLanguageServer": true,
+    "terminal.integrated.cursorStyle": "line",
+    "files.trimTrailingWhitespace": true,
+    "window.zoomLevel": 0,
+    "gitProjectManager.openInNewWindow": true,
+    "gitProjectManager.baseProjectsFolders": [
+        "/Users/barrettbrown/workspace"
+    ],
+    "gitProjectManager.ignoredFolders": [
+        "/Users/barrettbrown/workspace/applcore/package-utils"
+    ],
+    "search.useIgnoreFiles": false,
+    "files.watcherExclude": {
+        "**/node_modules/**": false
+    },
+    "javascript.suggest.names": false,
+    "breadcrumbs.enabled": true,
+    "jasmineExplorer.breakOnFirstLine": true,
+    "jasmineExplorer.logpanel": true,
+    "lua.format.indentCount": 2,
+    "lua.format.singleQuote": true,
+    "lua.targetVersion": "5.3"
+}
