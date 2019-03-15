@@ -151,7 +151,7 @@ export LSCOLORS="exgxdHdHcxaHaHhBhDeaec"
 export ENHANCD_FILTER="fzf:peco:percol"
 export ENHANCD_COMMAND='c'
 export HUB_PROTOCOL=https
-export BAT_THEME="Monokai Extended Bright"
+export BAT_THEME="1337"
 export GOPATH="$HOME/go"
 export XDG_CONFIG_HOME="$HOME/.config"
 
@@ -296,7 +296,7 @@ setopt pushd_minus              # Reference stack entries with "-".
 setopt long_list_jobs
 setopt extended_glob
 
-setopt notify	                # Report the status of backgrounds jobs immediately
+setopt notify	                  # Report the status of backgrounds jobs immediately
 
 # =============================================================================
 #                                   Keybindings
@@ -682,7 +682,6 @@ zplug load
 [ -d "/usr/local/opt/go/libexec/bin" ] && export PATH="$PATH:/usr/local/opt/go/libexec/bin"
 [ -d "$HOME/go/bin" ] && export PATH="$PATH:$HOME/go/bin"
 [ -d "/usr/local/sbin" ] && export PATH="$PATH:/usr/local/sbin"
-[ -d "/usr/local/lib/ruby/gems/2.6.0/bin" ] && export PATH="$PATH:/usr/local/lib/ruby/gems/2.6.0/bin"
 [ -d "/home/linuxbrew/.linuxbrew/bin" ] && export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
 # Other things
