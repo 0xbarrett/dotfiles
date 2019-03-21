@@ -203,8 +203,8 @@ zplug "seebi/dircolors-solarized", ignore:"*", as:plugin
 zplug "vifon/deer", use:deer
 
 # Load theme
-# zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
-zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
+zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
+#zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 
 #zplug "plugins/common-aliases",    from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
@@ -496,7 +496,7 @@ if zplug check "wfxr/forgit"; then
     forgit_stash_show=gsti
 fi
 
-if zplug check "romkatv/powerlevel10k"; then
+if zplug check "bhilburn/powerlevel9k"; then
     #gruvbox colors
     GRUVBOX_FG0=229
     GRUVBOX_FG1=223
