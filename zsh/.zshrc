@@ -227,6 +227,7 @@ zplug "MichaelAquilina/zsh-emojis"
 zplug "b4b4r07/httpstat", as:command, use:'(*).sh', rename-to:'$1'
 zplug "caarlos0/open-pr"
 zplug "MikeDacre/careful_rm"
+zplug "urbainvaes/fzf-marks"
 
 if [[ $OSTYPE = (darwin)* ]]; then
     zplug "lib/clipboard",         from:oh-my-zsh
@@ -690,7 +691,7 @@ zplug load
 
 # Other things
 # eval "$(hub alias -s)"
-eval "$(jump shell)"
+#eval "$(jump shell)"
 eval "$(npm completion)"
 
 [ -e "/home/linuxbrew/.linuxbrew/bin/brew" ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
