@@ -182,7 +182,7 @@ zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf, \
 zplug "junegunn/fzf", use:"shell/*.zsh", as:plugin
 
 # Enhanced cd
-zplug "b4b4r07/enhancd", use:init.sh
+#zplug "b4b4r07/enhancd", use:init.sh
 
 # Bookmarks and jump
 #zplug "jocelynmallon/zshmarks"
@@ -288,6 +288,7 @@ setopt hist_ignore_all_dups     # Remember only one unique copy of the command.
 setopt hist_reduce_blanks       # Remove superfluous blanks.
 setopt hist_save_no_dups        # Omit older commands in favor of newer ones.
 setopt hist_ignore_space        # Ignore commands that start with space.
+setopt brace_ccl                # Make {a-c} expand to a b c
 
 # Changing directories
 setopt auto_pushd
@@ -321,6 +322,7 @@ alias which="type -a"
 alias cx="chmod +x"
 alias make="make -j8"
 alias please='sudo $(fc -ln -1)'
+alias plz=please
 alias cls="colorls"
 alias clsa="colorls -al"
 alias tiga="tig --all"
@@ -345,7 +347,10 @@ alias gpc="git print-commit"
 alias src='source ~/.zshrc'
 alias wch='type -a'
 
-# Directory management
+# ls stuff
+if (( $+commands[gls] )); then
+  alias ls='gls -F --color --group-directories-first'
+fi
 alias lal='ls -al'
 alias lla='ls -lAF'        # Show hidden all files
 alias ll='ls -lF'          # Show long file information
