@@ -350,6 +350,8 @@ alias wch='type -a'
 # ls stuff
 if (( $+commands[gls] )); then
   alias ls='gls -F --color --group-directories-first'
+else
+  alias ls='ls --color=auto --group-directories-first'
 fi
 alias lal='ls -al'
 alias lla='ls -lAF'        # Show hidden all files
