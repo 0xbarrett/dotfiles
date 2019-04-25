@@ -31,12 +31,6 @@ ln -sf $CUR_DIR/asdf/.default-gems $HOME/.default-gems
 ln -sf $CUR_DIR/asdf/.default-npm-packages $HOME/.default-npm-packages
 ln -sf $CUR_DIR/asdf/.default-python-packages $HOME/.default-python-packages
 
-#vscode
-if [[ $OSTYPE = (darwin)* ]]; then
-  ln -sf $CUR_DIR/vscode/settings.json $HOME/Library/Application\ Support/Code/User/settings.json
-  ln -sf $CUR_DIR/vscode/keybindings.json $HOME/Library/Application\ Support/Code/User/keybindings.json
-fi
-
 #other
 ln -sf $CUR_DIR/gruvbox_256palette_osx.sh $HOME/.config/
 ln -sf $CUR_DIR/colorls/dark_colors.yaml $HOME/.config/colorls/dark_colors.yaml
