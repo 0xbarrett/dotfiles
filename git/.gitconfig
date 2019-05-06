@@ -55,12 +55,6 @@
 [apply]
 	whitespace = warn
 
-[http "https://github.appl.ge.com"]
-	proxy =
-
-[https "https://github.appl.ge.com"]
-	proxy =
-
 [gpg]
 	program = gpg2
 
@@ -83,11 +77,3 @@
 
 [diff-so-fancy]
 	stripLeadingSymbols = false
-
-[difftool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/araxiscompare-w.sh -2 \"$LOCAL\" \"$REMOTE\"
-	path = 
-
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/araxisgitmerge-w.sh \"$REMOTE\" \"$BASE\" \"$LOCAL\" \"$MERGED\"
-	trustExitCode = true
