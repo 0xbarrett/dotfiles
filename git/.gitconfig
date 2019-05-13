@@ -6,7 +6,7 @@
 	signingkey = E8521E262B7AC8C9
 
 [core]
-	excludesfile = /Users/barrettbrown/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = micro
 	pager = "diff-so-fancy | less --tabs=4 -RFX"
 	autocrlf = input
