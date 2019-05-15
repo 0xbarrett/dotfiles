@@ -148,8 +148,6 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export CLICOLOR="YES" # Equivalent to passing -G to ls.
 export LSCOLORS="exgxdHdHcxaHaHhBhDeaec"
-export ENHANCD_FILTER="fzf:peco:percol"
-export ENHANCD_COMMAND='c'
 export HUB_PROTOCOL=https
 export BAT_THEME="1337"
 export GOPATH="$HOME/go"
@@ -182,7 +180,7 @@ zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf, \
 zplug "junegunn/fzf", use:"shell/*.zsh", as:plugin
 
 # Enhanced cd
-#zplug "b4b4r07/enhancd", use:init.sh
+zplug "b4b4r07/enhancd", use:init.sh
 
 # Bookmarks and jump
 #zplug "jocelynmallon/zshmarks"
@@ -203,8 +201,8 @@ zplug "seebi/dircolors-solarized", ignore:"*", as:plugin
 zplug "vifon/deer", use:deer
 
 # Load theme
-zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
-#zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
+#zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
+zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 
 #zplug "plugins/common-aliases",    from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
@@ -249,8 +247,9 @@ zplug "wfxr/forgit"
 zplug "plugins/sudo",              from:oh-my-zsh, if:"(( $+commands[sudo] ))"
 zplug "plugins/gpg-agent",         from:oh-my-zsh, if:"(( $+commands[gpg-agent] ))"
 #zplug "plugins/systemd",           from:oh-my-zsh, if:"(( $+commands[systemctl] ))"
-#zplug "plugins/docker",            from:oh-my-zsh, if:"(( $+commands[docker] ))"
-#zplug "plugins/docker-compose",    from:oh-my-zsh, if:"(( $+commands[docker-compose] ))"
+zplug "plugins/docker",            from:oh-my-zsh, if:"(( $+commands[docker] ))"
+zplug "plugins/docker-compose",    from:oh-my-zsh, if:"(( $+commands[docker-compose] ))"
+zplug "plugins/httpie",            from:oh-my-zsh, if:"(( #+commands[http] ))"
 
 zplug "hlissner/zsh-autopair", defer:2
 zplug "zsh-users/zsh-completions"
@@ -473,8 +472,10 @@ if zplug check "zsh-users/zsh-syntax-highlighting"; then
 fi
 
 if zplug check "b4b4r07/enhancd"; then
-    ENHANCD_DOT_SHOW_FULLPATH=1
-    ENHANCD_DISABLE_HOME=0
+    ENHANCD_FILTER="fzf:peco:percol"
+    ENHANCD_COMMAND='cd'
+    ENHANCD_DOT_SHOW_FULLPATH=0
+    ENHANCD_DOT_ARG='...'
 fi
 
 if zplug check "b4b4r07/zsh-history-enhanced"; then
@@ -504,7 +505,8 @@ if zplug check "wfxr/forgit"; then
     forgit_stash_show=gsti
 fi
 
-if zplug check "bhilburn/powerlevel9k"; then
+if zplug check "romkatv/powerlevel10k"; then
+#if zplug check "bhilburn/powerlevel9k"; then
     #gruvbox colors
     GRUVBOX_FG0=229
     GRUVBOX_FG1=223
@@ -697,8 +699,6 @@ zplug load
 . $HOME/.asdf/completions/asdf.bash
 
 # Other things
-# eval "$(hub alias -s)"
-#eval "$(jump shell)"
 eval "$(npm completion)"
 
 [ -e "/home/linuxbrew/.linuxbrew/bin/brew" ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
