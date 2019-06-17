@@ -342,16 +342,21 @@ alias gprc="hub pull-request -o -c"
 alias gre="git recent"
 alias gmpr="git mpr"
 alias gpc="git print-commit"
+alias gstt="git status --ignore-submodules"
+alias gclean="git clean -fd"
 
 alias src='source ~/.zshrc'
 alias wch='type -a'
 
 # ls stuff
-if (( $+commands[gls] )); then
+if (( $+commands[lsd] )); then
+  alias ls='lsd -F --group-dirs first'
+elif (( $+commands[gls] )); then
   alias ls='gls -F --color --group-directories-first'
 else
   alias ls='ls --color=auto --group-directories-first'
 fi
+
 alias lal='ls -al'
 alias lla='ls -lAF'        # Show hidden all files
 alias ll='ls -lF'          # Show long file information
