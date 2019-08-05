@@ -19,7 +19,7 @@ brew "aircrack-ng"
 brew "akka"
 brew "algernon"
 brew "gsl"
-brew "algol68g", args: ["with-gsl"]
+brew "algol68g"
 brew "icu4c"
 brew "node"
 brew "angular-cli"
@@ -28,8 +28,6 @@ brew "jq"
 brew "ansiweather"
 brew "ant"
 brew "apktool"
-brew "apm-bash-completion"
-brew "app-engine-go-64"
 brew "apr-util"
 brew "ascii"
 brew "asciidoctor"
@@ -68,9 +66,7 @@ brew "pixman"
 brew "catimg"
 brew "ccache"
 brew "ccrypt"
-brew "ceylon"
 brew "check"
-brew "chromedriver"
 brew "clang-format"
 brew "clib"
 brew "libsigsegv"
@@ -88,7 +84,7 @@ brew "crunch"
 brew "libyaml"
 brew "crystal"
 brew "curlftpfs"
-brew "dar", args: ["with-libgcrypt", "with-lzo"]
+brew "dar"
 brew "dbus"
 brew "ddrescue"
 brew "devd"
@@ -97,7 +93,6 @@ brew "dialog"
 brew "diff-so-fancy"
 brew "libksba"
 brew "pth"
-brew "dirmngr"
 brew "distcc"
 brew "dmd"
 brew "docbook"
@@ -115,9 +110,7 @@ brew "portaudio"
 brew "fluid-synth"
 brew "dosbox-x"
 brew "doxygen"
-brew "drip"
 brew "dub"
-brew "ecj"
 brew "gd"
 brew "graphviz"
 brew "orc"
@@ -126,12 +119,11 @@ brew "speex"
 brew "libvpx"
 brew "json-c"
 brew "libsoxr"
-brew "luajit", args: ["with-52compat"]
 brew "qt"
 brew "efl"
 brew "elinks"
 brew "openssl@1.1"
-brew "erlang", args: ["HEAD", "with-fop", "with-native-libs"]
+brew "erlang"
 brew "elixir"
 brew "elm"
 brew "swig"
@@ -189,7 +181,6 @@ brew "pinentry"
 brew "googler"
 brew "gource"
 brew "gpatch"
-brew "gpg-agent"
 brew "gpgme"
 brew "gradle"
 brew "grafana"
@@ -200,7 +191,6 @@ brew "gst-libav"
 brew "gti"
 brew "haskell-stack"
 brew "help2man"
-brew "heroku"
 brew "hexedit"
 brew "highlight"
 brew "hstr"
@@ -290,7 +280,6 @@ brew "mit-scheme"
 brew "mono"
 brew "moreutils"
 brew "mosh"
-brew "mplayer", args: ["HEAD"]
 brew "vapoursynth"
 brew "mpv"
 brew "mtools"
@@ -369,7 +358,6 @@ brew "tokei"
 brew "tomcat"
 brew "tree"
 brew "ttyd"
-brew "typesafe-activator"
 brew "uncrustify"
 brew "unrar"
 brew "vim"
@@ -390,31 +378,3 @@ brew "zopfli"
 brew "zsh"
 brew "browsh-org/browsh/browsh"
 brew "dart-lang/dart/dart"
-cask "golly"
-cask "iterm2"
-cask "julia"
-cask "outguess"
-cask "unetbootin"
-cask "unity"
-cask "vlc"
-mas "Battery Health", id: 490192174
-mas "BetterSnapTool", id: 417375580
-mas "Cathode", id: 499233976
-mas "Day One", id: 1055511498
-mas "DiscoBrick Lite", id: 598281546
-mas "Disk Speed Test", id: 425264550
-mas "Finch for Inbox", id: 1084249373
-mas "GarageBand", id: 682658836
-mas "GIF Brewery 3", id: 1081413713
-mas "HexMiner", id: 851796114
-mas "iMovie", id: 408981434
-mas "Keynote", id: 409183694
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
-mas "PhotoScape X", id: 929507092
-mas "Radar Extreme", id: 1018595860
-mas "Speedtest", id: 1153157709
-mas "The Unarchiver", id: 425424353
-mas "Wireless Signal", id: 582840059
-mas "XChat Azure", id: 447521961
-mas "Yoink", id: 457622435
