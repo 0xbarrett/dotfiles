@@ -328,6 +328,7 @@ alias cls="colorls"
 alias clsa="colorls -al"
 alias tiga="tig --all"
 alias tm="tmux -2"
+alias help="run-help"
 
 # Remove .DS_Store files from current directory, recursively
 alias rmds="find . -name '*.DS_Store' -type f -delete"
@@ -559,3 +560,6 @@ eval "$(npm completion)"
 
 # Remove duplicate entries in PATH
 PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
+
+# Remove dumb alias of run-help to man and replace with useful run-help for builtins
+autoload run-help
