@@ -6,11 +6,13 @@ CUR_DIR=`pwd`
 [[ ! -d $HOME/.config/nvim ]] && mkdir $HOME/.config/nvim
 [[ ! -d $HOME/.SpaceVim.d ]] && mkdir $HOME/.SpaceVim.d
 [[ ! -d $HOME/.history ]] && mkdir $HOME/.history
+[[ ! -d $HOME/.config/p10k ]] && mkdir $HOME/.config/p10k
 
 # zsh
 ln -sf $CUR_DIR/zsh/.zshrc $HOME/.zshrc
 ln -sf $CUR_DIR/zsh/.zsh_aliases $HOME/.zsh_aliases
 ln -sf $CUR_DIR/zsh/zlogin.zsh $HOME/.zlogin
+ln -sf $CUR_DIR/zsh/.p10k.zsh $HOME/.config/p10k/.p10k.zsh
 
 # git
 ln -sf $CUR_DIR/git/.gitconfig $HOME/.gitconfig
