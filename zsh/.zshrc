@@ -346,6 +346,8 @@ alias gmpr="git mpr"
 alias gpc="git print-commit"
 alias gstt="git status --ignore-submodules"
 alias gclean="git clean -fd"
+alias grst="git restore"
+alias grsts="git restore --staged"
 
 alias src='source ~/.zshrc'
 alias wch='type -a'
