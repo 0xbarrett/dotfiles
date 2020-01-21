@@ -168,7 +168,7 @@ export GIT_EDITOR=$EDITOR
 source ~/.zplug/init.zsh
 
 # zplug
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+# zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 # Miscellaneous commands
 zplug "k4rthik/git-cal",  as:command
