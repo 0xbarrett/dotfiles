@@ -28,6 +28,7 @@ pycodestyle
 pyelftools
 Pygments
 pylint
+pyocd
 pyusb
 PyYAML
 requests

@@ -56,7 +56,7 @@
 	whitespace = warn
 
 [submodule]
-    fetchJobs = 16
+	fetchJobs = 16
 
 [gpg]
 	program = gpg2
@@ -80,3 +80,9 @@
 
 [diff-so-fancy]
 	stripLeadingSymbols = false
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

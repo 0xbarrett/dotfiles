@@ -134,6 +134,20 @@ function fs() {
   fi;
 }
 
+function git-fatfiles() {
+  git rev-list --all --objects | \
+    sed -n $(git rev-list --objects --all | \
+    cut -f1 -d' ' | \
+    git cat-file --batch-check | \
+    grep blob | \
+    sort -n -k 3 | \
+    tail -n40 | \
+    while read hash type size; do
+         echo -n "-e s/$hash/$size/p ";
+    done) | \
+    sort -n -k1
+}
+
 # =============================================================================
 #                                   Variables
 # =============================================================================
@@ -221,8 +235,7 @@ zplug "plugins/history",           from:oh-my-zsh
 #zplug "plugins/fancy-ctrl-z",      from:oh-my-zsh
 zplug "MichaelAquilina/zsh-emojis"
 zplug "b4b4r07/httpstat", as:command, use:'(*).sh', rename-to:'$1'
-zplug "caarlos0/open-pr"
-zplug "MikeDacre/careful_rm"
+#zplug "MikeDacre/careful_rm"
 zplug "urbainvaes/fzf-marks"
 
 if [[ $OSTYPE = (darwin)* ]]; then
@@ -252,6 +265,8 @@ zplug "plugins/httpie",            from:oh-my-zsh, if:"(( #+commands[http] ))"
 zplug "hlissner/zsh-autopair", defer:2
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
+
+zplug "aloxaf/fzf-tab"
 
 # zsh-syntax-highlighting must be loaded after executing compinit command
 # and sourcing other plugins
@@ -314,6 +329,7 @@ bindkey "^[[3~" delete-char
 alias grep='() { $(whence -p grep) --color=auto $@ }'
 alias egrep='() { $(whence -p egrep) --color=auto $@ }'
 alias vim='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
+alias upgrayedd='brew upgrade'
 
 # Custom helper aliases
 alias cp="cp -iv"
@@ -329,6 +345,7 @@ alias clsa="colorls -al"
 alias tiga="tig --all"
 alias tm="tmux -2"
 alias help="run-help"
+alias tre="br"
 
 # Remove .DS_Store files from current directory, recursively
 alias rmds="find . -name '*.DS_Store' -type f -delete"
@@ -486,6 +503,7 @@ if zplug check "b4b4r07/enhancd"; then
     ENHANCD_COMMAND='cd'
     ENHANCD_DOT_SHOW_FULLPATH=0
     ENHANCD_DOT_ARG='...'
+    ENHANCD_HYPHEN_ARG='--'
 fi
 
 if zplug check "b4b4r07/zsh-history-enhanced"; then
@@ -542,12 +560,11 @@ zplug load
 [ -d "$HOME/bin" ] && export PATH="$HOME/bin:$PATH"
 [ -d "/Applications/Araxis\ Merge.app/Contents/Utilities" ] && export PATH="/Applications/Araxis\ Merge.app/Contents/Utilities:$PATH"
 [ -d "$HOME/Library/Android/sdk/platform-tools" ] && export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
-[ -d "$HOME/Library/Python/2.7/bin" ] && export PATH="$PATH:$HOME/Library/Python/2.7/bin"
-[ -d "$HOME/Library/Python/3.7/bin" ] && export PATH="$PATH:$HOME/Library/Python/3.7/bin"
 [ -d "/usr/local/opt/go/libexec/bin" ] && export PATH="$PATH:/usr/local/opt/go/libexec/bin"
 [ -d "$HOME/go/bin" ] && export PATH="$PATH:$HOME/go/bin"
 [ -d "/usr/local/sbin" ] && export PATH="$PATH:/usr/local/sbin"
 [ -d "/home/linuxbrew/.linuxbrew/bin" ] && export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+[ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
 
 # Load asdf
 . $HOME/.asdf/asdf.sh
@@ -555,7 +572,7 @@ zplug load
 
 # Other things
 eval "$(npm completion)"
-
+[[ -f ~/Library/Preferences/org.dystroy.broot/launcher/bash/br ]] && source ~/Library/Preferences/org.dystroy.broot/launcher/bash/br
 [ -e "/home/linuxbrew/.linuxbrew/bin/brew" ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 # Remove duplicate entries in PATH

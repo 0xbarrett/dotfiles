@@ -5,3 +5,4 @@ express
 eslint
 js-beautify
 nodemon
+jasmine
