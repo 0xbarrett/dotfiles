@@ -267,10 +267,10 @@ zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
 
 zplug "aloxaf/fzf-tab"
+zplug "zdharma/history-search-multi-word"
 
 # zsh-syntax-highlighting must be loaded after executing compinit command
 # and sourcing other plugins
-#zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zdharma/fast-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search", defer:3
 
@@ -415,11 +415,6 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 zstyle ':completion:*' menu select # Use completion menu for completion when available.
 zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:kill:*'   force-list always
-#zstyle ':completion:*' verbose yes
-#zstyle ':completion:*:descriptions' format '%B%d%b'
-#zstyle ':completion:*:messages' format '%d'
-#zstyle ':completion:*:warnings' format 'No matches for: %d'
-#zstyle ':completion:*' group-name ''
 
 # case-insensitive (all), partial-word and then substring completion
 zstyle ":completion:*" matcher-list \
@@ -432,25 +427,6 @@ zstyle ":completion:*:default" list-colors ${(s.:.)LS_COLORS}
 # =============================================================================
 #                                   Startup
 # =============================================================================
-
-# Load SSH and GPG agents via keychain.
-setup_agents() {
-  [[ $UID -eq 0 ]] && return
-
-  if (( $+commands[keychain] )); then
-    local -a ssh_keys gpg_keys
-    for i in ~/.ssh/**/*pub; do test -f "$i(.N:r)" && ssh_keys+=("$i(.N:r)"); done
-    gpg_keys=$(gpg -K --with-colons 2>/dev/null | awk -F : '$1 == "sec" { print $5 }')
-    if (( $#ssh_keys > 0 )) || (( $#gpg_keys > 0 )); then
-      alias run_agents='() { $(whence -p keychain) --quiet --eval --inherit any-once --agents ssh,gpg $ssh_keys ${(f)gpg_keys} }'
-      #[[ -t ${fd:-0} || -p /dev/stdin ]] && eval `run_agents`
-      unalias run_agents
-    fi
-  fi
-}
-
-#setup_agents
-#unfunction setup_agents
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check; then
@@ -523,6 +499,18 @@ if zplug check "zsh-users/zsh-autosuggestions"; then
     ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 fi
 
+if zplug check "junegunn/fzf"; then
+# Use fd for listing path candidates
+  _fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+fi
+
 if zplug check "wfxr/forgit"; then
     forgit_log=gli
     forgit_diff=gdi
@@ -534,7 +522,6 @@ if zplug check "wfxr/forgit"; then
 fi
 
 if zplug check "romkatv/powerlevel10k"; then
-#if zplug check "bhilburn/powerlevel9k"; then
   [[ -f ~/.config/p10k/.p10k.zsh ]] && source ~/.config/p10k/.p10k.zsh
 fi
 
@@ -565,13 +552,13 @@ zplug load
 [ -d "/usr/local/sbin" ] && export PATH="$PATH:/usr/local/sbin"
 [ -d "/home/linuxbrew/.linuxbrew/bin" ] && export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
+[ -d "$HOME/.cargo/bin" ] && export PATH="$HOME/.cargo/bin:$PATH"
 
 # Load asdf
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 
 # Other things
-eval "$(npm completion)"
 [[ -f ~/Library/Preferences/org.dystroy.broot/launcher/bash/br ]] && source ~/Library/Preferences/org.dystroy.broot/launcher/bash/br
 [ -e "/home/linuxbrew/.linuxbrew/bin/brew" ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
