@@ -15,6 +15,9 @@
 [commit]
 	gpgsign = true
 
+[pull]
+	rebase = false
+
 [diff]
 	tool = araxis
 	mnemonicprefix = true

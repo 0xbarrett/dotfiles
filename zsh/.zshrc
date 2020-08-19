@@ -352,9 +352,9 @@ alias rmds="find . -name '*.DS_Store' -type f -delete"
 
 # Additional git aliases
 alias gsup="git sup"
-alias gbcu="git bcu"
+alias gbcu="git trim"
 alias gbcup="gbcu"
-alias gtree="git tree"
+alias gt="git tree"
 alias gdtl="git difftool --no-prompt"
 alias gprl="hub pr list --state=all --limit=10 -f \"%sC%>(8)%i%Creset %<(40)%t %Cyellow$(print "\ue725") %<(35)%H %Cblue%U%n\""
 alias gprls="hub pr list --state=all --limit=10 -f \"%sC%>(8)%i%Creset $(print "\ue725") %<(50)%t %Cblue%U%n\""
@@ -516,9 +516,10 @@ if zplug check "wfxr/forgit"; then
     forgit_diff=gdi
     forgit_add=gai
     forgit_ignore=gii
-    forgit_restore=
+    forgit_restore=gri
     forgit_clean=gci
     forgit_stash_show=gsti
+    forgit_reset_head=guni
 fi
 
 if zplug check "romkatv/powerlevel10k"; then
@@ -544,15 +545,18 @@ zplug load
 [[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases
 
 # Add junk to path that I probably don't need
-[ -d "$HOME/bin" ] && export PATH="$HOME/bin:$PATH"
-[ -d "/Applications/Araxis\ Merge.app/Contents/Utilities" ] && export PATH="/Applications/Araxis\ Merge.app/Contents/Utilities:$PATH"
-[ -d "$HOME/Library/Android/sdk/platform-tools" ] && export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
-[ -d "/usr/local/opt/go/libexec/bin" ] && export PATH="$PATH:/usr/local/opt/go/libexec/bin"
-[ -d "$HOME/go/bin" ] && export PATH="$PATH:$HOME/go/bin"
-[ -d "/usr/local/sbin" ] && export PATH="$PATH:/usr/local/sbin"
-[ -d "/home/linuxbrew/.linuxbrew/bin" ] && export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
-[ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
-[ -d "$HOME/.cargo/bin" ] && export PATH="$HOME/.cargo/bin:$PATH"
+[[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
+[[ -d "/Applications/Araxis\ Merge.app/Contents/Utilities" ]] && export PATH="/Applications/Araxis\ Merge.app/Contents/Utilities:$PATH"
+[[ -d "$HOME/Library/Android/sdk/platform-tools" ]] && export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
+[[ -d "/usr/local/opt/go/libexec/bin" ]] && export PATH="$PATH:/usr/local/opt/go/libexec/bin"
+[[ -d "$HOME/go/bin" ]] && export PATH="$PATH:$HOME/go/bin"
+[[ -d "/usr/local/sbin" ]] && export PATH="$PATH:/usr/local/sbin"
+[[ -d "/home/linuxbrew/.linuxbrew/bin" ]] && export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+[[ -d "$HOME/.local/bin" ]] && export PATH="$PATH:$HOME/.local/bin"
+[[ -d "$HOME/.cargo/bin" ]] && export PATH="$HOME/.cargo/bin:$PATH"
+
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
 
 # Load asdf
 . $HOME/.asdf/asdf.sh
@@ -560,7 +564,7 @@ zplug load
 
 # Other things
 [[ -f ~/Library/Preferences/org.dystroy.broot/launcher/bash/br ]] && source ~/Library/Preferences/org.dystroy.broot/launcher/bash/br
-[ -e "/home/linuxbrew/.linuxbrew/bin/brew" ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+[[ -e "/home/linuxbrew/.linuxbrew/bin/brew" ]] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 # Remove duplicate entries in PATH
 PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
