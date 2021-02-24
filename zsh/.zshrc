@@ -156,7 +156,7 @@ function git-fatfiles() {
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border --inline-info --color=dark,bg+:235,hl+:10,pointer:5'
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_DEFAULT_COMMAND='fd --type f --type d --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export CLICOLOR="YES" # Equivalent to passing -G to ls.
 export LSCOLORS="exgxdHdHcxaHaHhBhDeaec"
@@ -194,9 +194,6 @@ zplug "junegunn/fzf", use:"shell/*.zsh", as:plugin
 # Enhanced cd
 zplug "b4b4r07/enhancd", use:init.sh
 
-# Bookmarks and jump
-#zplug "jocelynmallon/zshmarks"
-
 # Enhanced dir list with git features
 zplug "supercrabtree/k"
 
@@ -216,57 +213,33 @@ zplug "vifon/deer", use:deer
 #zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 
-#zplug "plugins/common-aliases",    from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/colorize",          from:oh-my-zsh
-#zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/copydir",           from:oh-my-zsh
 zplug "plugins/copyfile",          from:oh-my-zsh
 zplug "plugins/cp",                from:oh-my-zsh
 zplug "plugins/dircycle",          from:oh-my-zsh
-#zplug "plugins/encode64",          from:oh-my-zsh
 zplug "plugins/extract",           from:oh-my-zsh
 zplug "plugins/history",           from:oh-my-zsh
-#zplug "plugins/tmux",              from:oh-my-zsh
-#zplug "plugins/tmuxinator",        from:oh-my-zsh
-#zplug "plugins/urltools",          from:oh-my-zsh
-#zplug "plugins/web-search",        from:oh-my-zsh
-#zplug "plugins/z",                 from:oh-my-zsh
-#zplug "plugins/fancy-ctrl-z",      from:oh-my-zsh
-zplug "MichaelAquilina/zsh-emojis"
-zplug "b4b4r07/httpstat", as:command, use:'(*).sh', rename-to:'$1'
-#zplug "MikeDacre/careful_rm"
-zplug "urbainvaes/fzf-marks"
-
-if [[ $OSTYPE = (darwin)* ]]; then
-    zplug "lib/clipboard",         from:oh-my-zsh
-    zplug "plugins/osx",           from:oh-my-zsh
-    #zplug "plugins/brew",          from:oh-my-zsh, if:"(( $+commands[brew] ))"
-fi
-
 zplug "plugins/git",               from:oh-my-zsh, if:"(( $+commands[git] ))"
-zplug "wfxr/forgit"
-#zplug "plugins/golang",            from:oh-my-zsh, if:"(( $+commands[go] ))"
-#zplug "plugins/svn",               from:oh-my-zsh, if:"(( $+commands[svn] ))"
-#zplug "plugins/node",              from:oh-my-zsh, if:"(( $+commands[node] ))"
-#zplug "plugins/npm",               from:oh-my-zsh, if:"(( $+commands[npm] ))"
-#zplug "plugins/bundler",           from:oh-my-zsh, if:"(( $+commands[bundler] ))"
-#zplug "plugins/gem",               from:oh-my-zsh, if:"(( $+commands[gem] ))"
-#zplug "plugins/rbenv",             from:oh-my-zsh, if:"(( $+commands[rbenv] ))"
-#zplug "plugins/rvm",               from:oh-my-zsh, if:"(( $+commands[rvm] ))"
-#zplug "plugins/pip",               from:oh-my-zsh, if:"(( $+commands[pip] ))"
 zplug "plugins/sudo",              from:oh-my-zsh, if:"(( $+commands[sudo] ))"
 zplug "plugins/gpg-agent",         from:oh-my-zsh, if:"(( $+commands[gpg-agent] ))"
-#zplug "plugins/systemd",           from:oh-my-zsh, if:"(( $+commands[systemctl] ))"
 zplug "plugins/docker",            from:oh-my-zsh, if:"(( $+commands[docker] ))"
 zplug "plugins/docker-compose",    from:oh-my-zsh, if:"(( $+commands[docker-compose] ))"
 zplug "plugins/httpie",            from:oh-my-zsh, if:"(( #+commands[http] ))"
+zplug "lib/clipboard",         from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
+zplug "plugins/osx",           from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
+
+zplug "MichaelAquilina/zsh-emojis"
+zplug "b4b4r07/httpstat", as:command, use:'(*).sh', rename-to:'$1'
+zplug "urbainvaes/fzf-marks"
+zplug "wfxr/forgit"
+zplug "aloxaf/fzf-tab", at:b2aae4cc
 
 zplug "hlissner/zsh-autopair", defer:2
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
 
-zplug "aloxaf/fzf-tab"
 zplug "zdharma/history-search-multi-word"
 
 # zsh-syntax-highlighting must be loaded after executing compinit command
