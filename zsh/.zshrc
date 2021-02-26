@@ -1,6 +1,13 @@
 # =============================================================================
 #                                   Functions
 # =============================================================================
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 powerlevel9k_random_color(){
     local code
     #for code ({000..255}) echo -n "$%F{$code}"
@@ -489,7 +496,7 @@ if zplug check "wfxr/forgit"; then
     forgit_diff=gdi
     forgit_add=gai
     forgit_ignore=gii
-    forgit_restore=gri
+    forgit_checkout_file=gri
     forgit_clean=gci
     forgit_stash_show=gsti
     forgit_reset_head=guni
