@@ -192,7 +192,6 @@ source ~/.zplug/init.zsh
 # zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 # Miscellaneous commands
-zplug "k4rthik/git-cal",  as:command
 zplug "peco/peco",        as:command, from:gh-r
 zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf, \
     use:"*${(L)$(uname -s)}*amd64*"
@@ -234,8 +233,8 @@ zplug "plugins/gpg-agent",         from:oh-my-zsh, if:"(( $+commands[gpg-agent] 
 zplug "plugins/docker",            from:oh-my-zsh, if:"(( $+commands[docker] ))"
 zplug "plugins/docker-compose",    from:oh-my-zsh, if:"(( $+commands[docker-compose] ))"
 zplug "plugins/httpie",            from:oh-my-zsh, if:"(( #+commands[http] ))"
-zplug "lib/clipboard",         from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
-zplug "plugins/osx",           from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
+zplug "lib/clipboard",             from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
+zplug "plugins/macos",             from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
 
 zplug "MichaelAquilina/zsh-emojis"
 zplug "b4b4r07/httpstat", as:command, use:'(*).sh', rename-to:'$1'
@@ -272,7 +271,6 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=$HISTSIZE
 
-setopt autocd                   # Allow changing directories without `cd`
 setopt append_history           # Dont overwrite history
 setopt extended_history         # Also record time and duration of commands.
 setopt share_history            # Share history between multiple shells

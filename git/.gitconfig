@@ -1,94 +1,94 @@
 [include]
-	path = .gitconfig_local
+path = .gitconfig_local
 
 [user]
-	name = Barrett Brown
-	signingkey = E8521E262B7AC8C9
+name = Barrett Brown
+signingkey = E8521E262B7AC8C9
 
 [core]
-	excludesfile = ~/.gitignore_global
-	editor = micro
-	pager = "diff-so-fancy | less --tabs=4 -RFX"
-	autocrlf = input
-	safecrlf = false
+excludesfile = ~/.gitignore_global
+editor = micro
+pager = "diff-so-fancy | less --tabs=4 -RFX"
+autocrlf = input
+safecrlf = false
 
 [commit]
-	gpgsign = true
+gpgsign = true
 
 [pull]
-	rebase = false
+rebase = false
 
 [diff]
-	tool = araxis
-	mnemonicprefix = true
+tool = araxis
+mnemonicprefix = true
 
 [merge]
-	tool = araxis
-	stat = true
+tool = araxis
+stat = true
 
 [mergetool "araxis"]
-	path = /Applications/Araxis Merge.app/Contents/Utilities/compare
-	keepBackup = false
+path = /Applications/Araxis Merge.app/Contents/Utilities/compare
+keepBackup = false
 
 [difftool "araxis"]
-	path = /Applications/Araxis Merge.app/Contents/Utilities/compare
+path = /Applications/Araxis Merge.app/Contents/Utilities/compare
 
 [alias]
-	s = status
-	st = status -s
-	f = fetch --prune
-	tree = log --graph --abbrev-commit --decorate --date=human --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-	ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=human
-	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-	lc  = "!f() { git ll "$1"^.."$1"; }; f"
-	lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
-	fl = log -u
-	filelog = log -u
-	dl = "!git ll -1"
-	dlc = diff --cached HEAD^
-	supf = submodule update --init --recursive --jobs 16 --force
-	sup = submodule update --init --recursive --jobs 16
-	la = "!git config -l | grep alias | cut -c 7-"
-	bcu = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
-	unstage = reset HEAD
-	dangled="!git fsck --no-reflog | awk '/dangling commit/ {print $3}'"
-	opr = "!open-pr"
-	print-commit = rev-parse --short HEAD
+s = status
+st = status -s
+f = fetch --prune
+tree = log --graph --abbrev-commit --decorate --date=human --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=human
+ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+lc = "!f() { git ll "$1"^.."$1"; }; f"
+lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+fl = log -u
+filelog = log -u
+dl = "!git ll -1"
+dlc = diff --cached HEAD^
+supf = submodule update --init --recursive --force
+sup = submodule update --init --recursive
+la = "!git config -l | grep alias | cut -c 7-"
+bcu = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+unstage = reset HEAD
+dangled="!git fsck --no-reflog | awk '/dangling commit/ {print $3}'"
+opr = "!open-pr"
+print-commit = rev-parse --short HEAD
 
 [apply]
-	whitespace = warn
+whitespace = warn
 
 [submodule]
-	fetchJobs = 16
+fetchJobs = 16
 
 [gpg]
-	program = gpg2
+program = gpg2
 
 [color]
-	ui = true
+ui = true
 
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+oldNormal = red bold
+oldHighlight = red bold 52
+newNormal = green bold
+newHighlight = green bold 22
 
 [color "diff"]
-	meta = yellow
-	frag = magenta bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
+meta = yellow
+frag = magenta bold
+commit = yellow bold
+old = red bold
+new = green bold
+whitespace = red reverse
 
 [diff-so-fancy]
-	stripLeadingSymbols = false
+stripLeadingSymbols = false
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f
+process = git-lfs filter-process
+required = true
 
 [advice]
-	detatchedHead = false
+detatchedHead = false
