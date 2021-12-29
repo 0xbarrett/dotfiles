@@ -522,6 +522,9 @@ zplug load
 [[ -f ~/.zsh_exports ]] && source ~/.zsh_exports
 [[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases
 
+# Rust env stuff
+[[ -f ~/.cargo/env ]] && source ~/.cargo/env
+
 # Add junk to path that I probably don't need
 [[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
 [[ -d "/Applications/Araxis\ Merge.app/Contents/Utilities" ]] && export PATH="/Applications/Araxis\ Merge.app/Contents/Utilities:$PATH"
@@ -531,14 +534,13 @@ zplug load
 [[ -d "/usr/local/sbin" ]] && export PATH="$PATH:/usr/local/sbin"
 [[ -d "/home/linuxbrew/.linuxbrew/bin" ]] && export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 [[ -d "$HOME/.local/bin" ]] && export PATH="$PATH:$HOME/.local/bin"
-[[ -d "$HOME/.cargo/bin" ]] && export PATH="$HOME/.cargo/bin:$PATH"
 
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 
 # Load asdf
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+[[ -f $HOME/.asdf/asdf.sh ]] && source $HOME/.asdf/asdf.sh
+[[ -f $HOME/.asdf/completions/asdf.bash ]] && source $HOME/.asdf/completions/asdf.bash
 
 # Other things
 [[ -f ~/Library/Preferences/org.dystroy.broot/launcher/bash/br ]] && source ~/Library/Preferences/org.dystroy.broot/launcher/bash/br
