@@ -159,6 +159,7 @@ function git-fatfiles() {
 #                                   Variables
 # =============================================================================
 [[ -e /usr/libexec/java_home ]] && export JAVA_HOME="$(/usr/libexec/java_home)"
+[[ -d "/opt/homebrew/bin" ]] && export PATH="/opt/homebrew/bin:$PATH"
 
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
@@ -246,11 +247,11 @@ zplug "hlissner/zsh-autopair", defer:2
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
 
-zplug "zdharma/history-search-multi-word"
+zplug "zdharma-continuum/history-search-multi-word"
 
 # zsh-syntax-highlighting must be loaded after executing compinit command
 # and sourcing other plugins
-zplug "zdharma/fast-syntax-highlighting", defer:2
+zplug "zdharma-continuum/fast-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search", defer:3
 
 # =============================================================================
@@ -525,7 +526,6 @@ zplug load
 # Rust env stuff
 [[ -f ~/.cargo/env ]] && source ~/.cargo/env
 
-# Add junk to path that I probably don't need
 [[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
 [[ -d "/Applications/Araxis\ Merge.app/Contents/Utilities" ]] && export PATH="/Applications/Araxis\ Merge.app/Contents/Utilities:$PATH"
 [[ -d "$HOME/Library/Android/sdk/platform-tools" ]] && export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
