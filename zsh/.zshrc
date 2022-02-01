@@ -172,6 +172,7 @@ export HUB_PROTOCOL=https
 export BAT_THEME="1337"
 export GOPATH="$HOME/go"
 export XDG_CONFIG_HOME="$HOME/.config"
+export HOMEBREW_NO_ENV_HINTS=1
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -194,8 +195,6 @@ source ~/.zplug/init.zsh
 
 # Miscellaneous commands
 zplug "peco/peco",        as:command, from:gh-r
-zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf, \
-    use:"*${(L)$(uname -s)}*amd64*"
 zplug "junegunn/fzf", use:"shell/*.zsh", as:plugin
 
 # Enhanced cd
