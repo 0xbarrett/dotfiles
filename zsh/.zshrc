@@ -221,7 +221,7 @@ zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/colorize",          from:oh-my-zsh
-zplug "plugins/copydir",           from:oh-my-zsh
+zplug "plugins/copypath",          from:oh-my-zsh
 zplug "plugins/copyfile",          from:oh-my-zsh
 zplug "plugins/cp",                from:oh-my-zsh
 zplug "plugins/dircycle",          from:oh-my-zsh
@@ -310,7 +310,7 @@ alias vim='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
 alias upgrayedd='brew upgrade'
 
 # Custom helper aliases
-alias cp="cp -iv"
+# alias cp="cp -iv"
 alias mv="mv -iv"
 alias which="type -a"
 alias cx="chmod +x"
