@@ -246,11 +246,11 @@ zplug "hlissner/zsh-autopair", defer:2
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
 
-zplug "zdharma-continuum/history-search-multi-word"
+zplug "zdharma/history-search-multi-word"
 
 # zsh-syntax-highlighting must be loaded after executing compinit command
 # and sourcing other plugins
-zplug "zdharma-continuum/fast-syntax-highlighting", defer:2
+zplug "zdharma/fast-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search", defer:3
 
 # =============================================================================
@@ -327,6 +327,8 @@ alias tre="br"
 
 # Remove .DS_Store files from current directory, recursively
 alias rmds="find . -name '*.DS_Store' -type f -delete"
+
+alias fuckingupdate="sudo softwareupdate -i -a -R"
 
 # Additional git aliases
 alias gsup="git sup"
