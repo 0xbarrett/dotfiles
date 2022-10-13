@@ -236,7 +236,6 @@ zplug "plugins/httpie",            from:oh-my-zsh, if:"(( #+commands[http] ))"
 zplug "lib/clipboard",             from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
 zplug "plugins/macos",             from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
 
-zplug "MichaelAquilina/zsh-emojis"
 zplug "b4b4r07/httpstat", as:command, use:'(*).sh', rename-to:'$1'
 zplug "urbainvaes/fzf-marks"
 zplug "wfxr/forgit"
@@ -282,6 +281,7 @@ setopt hist_reduce_blanks       # Remove superfluous blanks.
 setopt hist_save_no_dups        # Omit older commands in favor of newer ones.
 setopt hist_ignore_space        # Ignore commands that start with space.
 setopt brace_ccl                # Make {a-c} expand to a b c
+setopt nomatch                  # Pass failed globs as an argument
 
 # Changing directories
 setopt auto_pushd
@@ -544,8 +544,9 @@ autoload -U +X bashcompinit && bashcompinit
 [[ -f $HOME/.asdf/completions/asdf.bash ]] && source $HOME/.asdf/completions/asdf.bash
 
 # Other things
-[[ -f ~/Library/Preferences/org.dystroy.broot/launcher/bash/br ]] && source ~/Library/Preferences/org.dystroy.broot/launcher/bash/br
+[[ -f $HOME/.config/broot/launcher/bash/br ]] && source $HOME/.config/broot/launcher/bash/br
 [[ -e "/home/linuxbrew/.linuxbrew/bin/brew" ]] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+[[ -a $(brew --prefix)/opt/git-extras/share/git-extras/git-extras-completion.zsh ]] && source $(brew --prefix)/opt/git-extras/share/git-extras/git-extras-completion.zsh
 
 # Remove duplicate entries in PATH
 PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
