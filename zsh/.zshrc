@@ -226,7 +226,6 @@ zplug "plugins/copyfile",          from:oh-my-zsh
 zplug "plugins/cp",                from:oh-my-zsh
 zplug "plugins/dircycle",          from:oh-my-zsh
 zplug "plugins/extract",           from:oh-my-zsh
-zplug "plugins/history",           from:oh-my-zsh
 zplug "plugins/git",               from:oh-my-zsh, if:"(( $+commands[git] ))"
 zplug "plugins/sudo",              from:oh-my-zsh, if:"(( $+commands[sudo] ))"
 zplug "plugins/gpg-agent",         from:oh-my-zsh, if:"(( $+commands[gpg-agent] ))"
@@ -245,12 +244,11 @@ zplug "hlissner/zsh-autopair", defer:2
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
 
-zplug "zdharma/history-search-multi-word"
+zplug "ellie/atuin"
 
 # zsh-syntax-highlighting must be loaded after executing compinit command
 # and sourcing other plugins
 zplug "zdharma/fast-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-history-substring-search", defer:3
 
 # =============================================================================
 #                                   Options
@@ -553,3 +551,5 @@ PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH})
 
 # Remove dumb alias of run-help to man and replace with useful run-help for builtins
 autoload run-help
+
+eval "$(atuin init zsh)"
