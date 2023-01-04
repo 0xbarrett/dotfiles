@@ -155,6 +155,10 @@ function git-fatfiles() {
     sort -n -k1
 }
 
+function unlock() {
+  find . -type f -name "index.lock" -delete
+}
+
 # =============================================================================
 #                                   Variables
 # =============================================================================
@@ -243,8 +247,6 @@ zplug "aloxaf/fzf-tab", at:b2aae4cc
 zplug "hlissner/zsh-autopair", defer:2
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
-
-zplug "ellie/atuin"
 
 # zsh-syntax-highlighting must be loaded after executing compinit command
 # and sourcing other plugins
@@ -551,5 +553,3 @@ PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH})
 
 # Remove dumb alias of run-help to man and replace with useful run-help for builtins
 autoload run-help
-
-eval "$(atuin init zsh)"
