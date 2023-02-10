@@ -177,6 +177,7 @@ export BAT_THEME="1337"
 export GOPATH="$HOME/go"
 export XDG_CONFIG_HOME="$HOME/.config"
 export HOMEBREW_NO_ENV_HINTS=1
+export PAGER=bat
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -346,6 +347,8 @@ alias gstt="git status --ignore-submodules"
 alias gclean="git clean -fd"
 alias grst="git restore"
 alias grsts="git restore --staged"
+alias gmt="git mergetool"
+alias gsupfrfr="git submodule update --init --recursive --force && git submodule foreach --recursive git clean -ffd && git clean -ffd"
 
 alias src='source ~/.zshrc'
 alias wch='type -a'
