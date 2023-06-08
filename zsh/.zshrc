@@ -195,24 +195,19 @@ export GIT_EDITOR=$EDITOR
 [ ! -d ~/.zplug ] && git clone https://github.com/zplug/zplug ~/.zplug
 source ~/.zplug/init.zsh
 
-# zplug
-# zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-
 # Miscellaneous commands
-zplug "peco/peco",        as:command, from:gh-r
-zplug "junegunn/fzf", use:"shell/*.zsh", as:plugin
+zplug "peco/peco", as:command, from:gh-r
 
 # Enhanced cd
 zplug "b4b4r07/enhancd", use:init.sh
+
+zplug "junegunn/fzf", use:"shell/*.zsh", as:plugin
 
 # Enhanced dir list with git features
 zplug "supercrabtree/k"
 
 # Jump back to parent directory
 zplug "tarrasch/zsh-bd"
-
-# Simple zsh calculator
-zplug "arzzen/calc.plugin.zsh"
 
 # Directory colors
 zplug "seebi/dircolors-solarized", ignore:"*", as:plugin
@@ -221,7 +216,6 @@ zplug "seebi/dircolors-solarized", ignore:"*", as:plugin
 zplug "vifon/deer", use:deer
 
 # Load theme
-#zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 
 zplug "plugins/colored-man-pages", from:oh-my-zsh
@@ -538,6 +532,7 @@ zplug load
 [[ -d "/usr/local/sbin" ]] && export PATH="$PATH:/usr/local/sbin"
 [[ -d "/home/linuxbrew/.linuxbrew/bin" ]] && export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 [[ -d "$HOME/.local/bin" ]] && export PATH="$PATH:$HOME/.local/bin"
+[[ -d "/opt/homebrew/opt/make/libexec/gnubin" ]] && export PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
 
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
