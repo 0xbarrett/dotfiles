@@ -159,6 +159,10 @@ function unlock() {
   find . -type f -name "index.lock" -delete
 }
 
+function merge-when-checks-complete() {
+  gh pr checks $1 --watch && osascript -e "display notification \"Ready to merge #$1\" with title \"Github Pull Request\"" && gh pr merge -d $1
+}
+
 # =============================================================================
 #                                   Variables
 # =============================================================================
@@ -192,7 +196,7 @@ export GIT_EDITOR=$EDITOR
 #                                   Plugins
 # =============================================================================
 # Check if zplug is installed
-[ ! -d ~/.zplug ] && git clone https://github.com/zplug/zplug ~/.zplug
+# [ ! -d ~/.zplug ] && git clone https://github.com/zplug/zplug ~/.zplug
 source ~/.zplug/init.zsh
 
 # Miscellaneous commands
@@ -237,15 +241,15 @@ zplug "plugins/macos",             from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]
 zplug "b4b4r07/httpstat", as:command, use:'(*).sh', rename-to:'$1'
 zplug "urbainvaes/fzf-marks"
 zplug "wfxr/forgit"
-zplug "aloxaf/fzf-tab", at:b2aae4cc
+zplug "aloxaf/fzf-tab", defer:2
 
 zplug "hlissner/zsh-autopair", defer:2
 zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-autosuggestions, defer:3"
 
 # zsh-syntax-highlighting must be loaded after executing compinit command
 # and sourcing other plugins
-zplug "zdharma/fast-syntax-highlighting", defer:2
+zplug "zdharma/fast-syntax-highlighting", defer:3
 
 # =============================================================================
 #                                   Options
@@ -392,6 +396,7 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 zstyle ':completion:*' menu select # Use completion menu for completion when available.
 zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:kill:*'   force-list always
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # case-insensitive (all), partial-word and then substring completion
 zstyle ":completion:*" matcher-list \
