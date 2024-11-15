@@ -185,7 +185,7 @@ export PAGER=bat
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='nano'
+    export EDITOR='micro'
 else
     export EDITOR='micro'
 fi
@@ -195,61 +195,8 @@ export GIT_EDITOR=$EDITOR
 # =============================================================================
 #                                   Plugins
 # =============================================================================
-# Check if zplug is installed
-# [ ! -d ~/.zplug ] && git clone https://github.com/zplug/zplug ~/.zplug
+export ZPLUG_LOADFILE=~/.zplug_packages.zsh
 source ~/.zplug/init.zsh
-
-# Miscellaneous commands
-zplug "peco/peco", as:command, from:gh-r
-
-# Enhanced cd
-zplug "b4b4r07/enhancd", use:init.sh
-
-zplug "junegunn/fzf", use:"shell/*.zsh", as:plugin
-
-# Enhanced dir list with git features
-zplug "supercrabtree/k"
-
-# Jump back to parent directory
-zplug "tarrasch/zsh-bd"
-
-# Directory colors
-zplug "seebi/dircolors-solarized", ignore:"*", as:plugin
-
-# Deer file navigator
-zplug "vifon/deer", use:deer
-
-# Load theme
-zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
-
-zplug "plugins/colored-man-pages", from:oh-my-zsh
-zplug "plugins/colorize",          from:oh-my-zsh
-zplug "plugins/copypath",          from:oh-my-zsh
-zplug "plugins/copyfile",          from:oh-my-zsh
-zplug "plugins/cp",                from:oh-my-zsh
-zplug "plugins/dircycle",          from:oh-my-zsh
-zplug "plugins/extract",           from:oh-my-zsh
-zplug "plugins/git",               from:oh-my-zsh, if:"(( $+commands[git] ))"
-zplug "plugins/sudo",              from:oh-my-zsh, if:"(( $+commands[sudo] ))"
-zplug "plugins/gpg-agent",         from:oh-my-zsh, if:"(( $+commands[gpg-agent] ))"
-zplug "plugins/docker",            from:oh-my-zsh, if:"(( $+commands[docker] ))"
-zplug "plugins/docker-compose",    from:oh-my-zsh, if:"(( $+commands[docker-compose] ))"
-zplug "plugins/httpie",            from:oh-my-zsh, if:"(( #+commands[http] ))"
-zplug "lib/clipboard",             from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
-zplug "plugins/macos",             from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
-
-zplug "b4b4r07/httpstat", as:command, use:'(*).sh', rename-to:'$1'
-zplug "urbainvaes/fzf-marks"
-zplug "wfxr/forgit"
-zplug "aloxaf/fzf-tab", defer:2
-
-zplug "hlissner/zsh-autopair", defer:2
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-autosuggestions, defer:3"
-
-# zsh-syntax-highlighting must be loaded after executing compinit command
-# and sourcing other plugins
-zplug "zdharma/fast-syntax-highlighting", defer:3
 
 # =============================================================================
 #                                   Options
@@ -295,7 +242,6 @@ setopt notify	                  # Report the status of backgrounds jobs immediat
 # =============================================================================
 #                                   Keybindings
 # =============================================================================
-
 bindkey "^[[3~" delete-char
 
 # =============================================================================
@@ -411,12 +357,12 @@ zstyle ":completion:*:default" list-colors ${(s.:.)LS_COLORS}
 # =============================================================================
 
 # Install plugins if there are plugins that have not been installed
-if ! zplug check; then
-    printf "Install plugins? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
+# if ! zplug check; then
+#     printf "Install plugins? [y/N]: "
+#     if read -q; then
+#         echo; zplug install
+#     fi
+# fi
 
 if zplug check "seebi/dircolors-solarized"; then
   which gdircolors &> /dev/null && alias dircolors='() { $(whence -p gdircolors) }'
@@ -424,13 +370,13 @@ if zplug check "seebi/dircolors-solarized"; then
       eval $(dircolors ~/.zplug/repos/seebi/dircolors-solarized/dircolors.256dark)
 fi
 
-if zplug check "zsh-users/zsh-history-substring-search"; then
-    zmodload zsh/terminfo
-    bindkey "$terminfo[kcuu1]" history-substring-search-up
-    bindkey "$terminfo[kcud1]" history-substring-search-down
-    bindkey "^[[1;5A" history-substring-search-up
-    bindkey "^[[1;5B" history-substring-search-down
-fi
+# if zplug check "zsh-users/zsh-history-substring-search"; then
+#     zmodload zsh/terminfo
+#     bindkey "$terminfo[kcuu1]" history-substring-search-up
+#     bindkey "$terminfo[kcud1]" history-substring-search-down
+#     bindkey "^[[1;5A" history-substring-search-up
+#     bindkey "^[[1;5B" history-substring-search-down
+# fi
 
 if zplug check "zsh-users/zsh-syntax-highlighting"; then
     #ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
@@ -456,7 +402,7 @@ if zplug check "zsh-users/zsh-syntax-highlighting"; then
     ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=yellow,bold'
 fi
 
-if zplug check "b4b4r07/enhancd"; then
+if zplug check "babarot/enhancd"; then
     ENHANCD_FILTER="fzf:peco:percol"
     ENHANCD_COMMAND='cd'
     ENHANCD_DOT_SHOW_FULLPATH=0
@@ -464,12 +410,20 @@ if zplug check "b4b4r07/enhancd"; then
     ENHANCD_HYPHEN_ARG='--'
 fi
 
-if zplug check "b4b4r07/zsh-history-enhanced"; then
-    ZSH_HISTORY_FILE="$HISTFILE"
-    ZSH_HISTORY_FILTER="fzf:peco:percol"
-    ZSH_HISTORY_KEYBIND_GET_BY_DIR="^r"
-    ZSH_HISTORY_KEYBIND_GET_ALL="^r^a"
+if zplug check "babarot/history"; then
+  ZSH_HISTORY_KEYBIND_GET="^r"
+  ZSH_HISTORY_KEYBIND_GET_ALL="^r^a"
+  ZSH_HISTORY_FILTER_OPTIONS="--filter-branch --filter-dir"
+  ZSH_HISTORY_KEYBIND_ARROW_UP="^p"
+  ZSH_HISTORY_KEYBIND_ARROW_DOWN="^n"
+  ZSH_HISTORY_FILTER="fzf"
 fi
+# if zplug check "babarot/zsh-history-ltsv"; then
+#     ZSH_HISTORY_FILE="$HISTFILE"
+#     ZSH_HISTORY_FILTER="fzf:peco:percol"
+#     ZSH_HISTORY_KEYBIND_GET_BY_DIR="^r"
+#     ZSH_HISTORY_KEYBIND_GET_ALL="^r^a"
+# fi
 
 if zplug check "vifon/deer"; then
     zle -N deer
