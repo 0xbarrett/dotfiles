@@ -92,3 +92,5 @@ required = true
 
 [advice]
 detatchedHead = false
+[credential]
+	helper = store

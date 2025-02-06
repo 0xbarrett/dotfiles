@@ -1,8 +1,6 @@
 # Enhanced cd
 zplug "babarot/enhancd", use:init.sh
-zplug "babarot/history", use:init.sh
-# zplug "babarot/zsh-history-ltsv"
-# zplug "zsh-users/zsh-history-substring-search", as:plugin
+zplug "zsh-users/zsh-history-substring-search", as:plugin
 
 # Enhanced dir list with git features
 zplug "supercrabtree/k"

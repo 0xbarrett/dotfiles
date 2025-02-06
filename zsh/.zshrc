@@ -163,6 +163,20 @@ function merge-when-checks-complete() {
   gh pr checks $1 --watch && osascript -e "display notification \"Ready to merge #$1\" with title \"Github Pull Request\"" && gh pr merge -d $1
 }
 
+function br {
+    local cmd cmd_file code
+    cmd_file=$(mktemp)
+    if broot --outcmd "$cmd_file" "$@"; then
+        cmd=$(<"$cmd_file")
+        command rm -f "$cmd_file"
+        eval "$cmd"
+    else
+        code=$?
+        command rm -f "$cmd_file"
+        return "$code"
+    fi
+}
+
 # =============================================================================
 #                                   Variables
 # =============================================================================
@@ -269,6 +283,8 @@ alias tiga="tig --all"
 alias tm="tmux -2"
 alias help="run-help"
 alias tre="br"
+alias ctl="sudo systemctl"
+alias jrl="sudo journalctl"
 
 # Remove .DS_Store files from current directory, recursively
 alias rmds="find . -name '*.DS_Store' -type f -delete"
@@ -370,13 +386,13 @@ if zplug check "seebi/dircolors-solarized"; then
       eval $(dircolors ~/.zplug/repos/seebi/dircolors-solarized/dircolors.256dark)
 fi
 
-# if zplug check "zsh-users/zsh-history-substring-search"; then
-#     zmodload zsh/terminfo
-#     bindkey "$terminfo[kcuu1]" history-substring-search-up
-#     bindkey "$terminfo[kcud1]" history-substring-search-down
-#     bindkey "^[[1;5A" history-substring-search-up
-#     bindkey "^[[1;5B" history-substring-search-down
-# fi
+if zplug check "zsh-users/zsh-history-substring-search"; then
+    zmodload zsh/terminfo
+    bindkey "$terminfo[kcuu1]" history-substring-search-up
+    bindkey "$terminfo[kcud1]" history-substring-search-down
+    bindkey "^[[1;5A" history-substring-search-up
+    bindkey "^[[1;5B" history-substring-search-down
+fi
 
 if zplug check "zsh-users/zsh-syntax-highlighting"; then
     #ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
@@ -409,21 +425,6 @@ if zplug check "babarot/enhancd"; then
     ENHANCD_DOT_ARG='...'
     ENHANCD_HYPHEN_ARG='--'
 fi
-
-if zplug check "babarot/history"; then
-  ZSH_HISTORY_KEYBIND_GET="^r"
-  ZSH_HISTORY_KEYBIND_GET_ALL="^r^a"
-  ZSH_HISTORY_FILTER_OPTIONS="--filter-branch --filter-dir"
-  ZSH_HISTORY_KEYBIND_ARROW_UP="^p"
-  ZSH_HISTORY_KEYBIND_ARROW_DOWN="^n"
-  ZSH_HISTORY_FILTER="fzf"
-fi
-# if zplug check "babarot/zsh-history-ltsv"; then
-#     ZSH_HISTORY_FILE="$HISTFILE"
-#     ZSH_HISTORY_FILTER="fzf:peco:percol"
-#     ZSH_HISTORY_KEYBIND_GET_BY_DIR="^r"
-#     ZSH_HISTORY_KEYBIND_GET_ALL="^r^a"
-# fi
 
 if zplug check "vifon/deer"; then
     zle -N deer
@@ -467,6 +468,9 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # Then, source plugins and add commands to $PATH
 zplug load
 
+# fzf keybindings
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Gruvbox colors
 [[ -f ~/.config/gruvbox_256palette_osx.sh ]] && source ~/.config/gruvbox_256palette_osx.sh
 
@@ -486,12 +490,13 @@ zplug load
 [[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
 [[ -d "/Applications/Araxis\ Merge.app/Contents/Utilities" ]] && export PATH="/Applications/Araxis\ Merge.app/Contents/Utilities:$PATH"
 [[ -d "$HOME/Library/Android/sdk/platform-tools" ]] && export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
-[[ -d "/usr/local/opt/go/libexec/bin" ]] && export PATH="$PATH:/usr/local/opt/go/libexec/bin"
-[[ -d "$HOME/go/bin" ]] && export PATH="$PATH:$HOME/go/bin"
 [[ -d "/usr/local/sbin" ]] && export PATH="$PATH:/usr/local/sbin"
 [[ -d "/home/linuxbrew/.linuxbrew/bin" ]] && export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 [[ -d "$HOME/.local/bin" ]] && export PATH="$PATH:$HOME/.local/bin"
 [[ -d "/opt/homebrew/opt/make/libexec/gnubin" ]] && export PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
+[[ -d "/usr/lib/cuda" ]] && export PATH="/usr/lib/cuda/bin:$PATH"
+
+[[ -d "$HOME/anaconda3/" ]] && eval "$(/home/barrett/anaconda3/bin/conda shell.zsh hook)"
 
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
@@ -501,7 +506,6 @@ autoload -U +X bashcompinit && bashcompinit
 [[ -f $HOME/.asdf/completions/asdf.bash ]] && source $HOME/.asdf/completions/asdf.bash
 
 # Other things
-[[ -f $HOME/.config/broot/launcher/bash/br ]] && source $HOME/.config/broot/launcher/bash/br
 [[ -e "/home/linuxbrew/.linuxbrew/bin/brew" ]] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 [[ -a $(brew --prefix)/opt/git-extras/share/git-extras/git-extras-completion.zsh ]] && source $(brew --prefix)/opt/git-extras/share/git-extras/git-extras-completion.zsh
 
@@ -510,3 +514,5 @@ PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH})
 
 # Remove dumb alias of run-help to man and replace with useful run-help for builtins
 autoload run-help
+
+source /home/barrett/.config/broot/launcher/bash/br
