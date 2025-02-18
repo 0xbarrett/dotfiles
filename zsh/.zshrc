@@ -491,11 +491,9 @@ zplug load
 [[ -d "/Applications/Araxis\ Merge.app/Contents/Utilities" ]] && export PATH="/Applications/Araxis\ Merge.app/Contents/Utilities:$PATH"
 [[ -d "$HOME/Library/Android/sdk/platform-tools" ]] && export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
 [[ -d "/usr/local/sbin" ]] && export PATH="$PATH:/usr/local/sbin"
-[[ -d "/home/linuxbrew/.linuxbrew/bin" ]] && export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 [[ -d "$HOME/.local/bin" ]] && export PATH="$PATH:$HOME/.local/bin"
 [[ -d "/opt/homebrew/opt/make/libexec/gnubin" ]] && export PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
 [[ -d "/usr/lib/cuda" ]] && export PATH="/usr/lib/cuda/bin:$PATH"
-
 [[ -d "$HOME/anaconda3/" ]] && eval "$(/home/barrett/anaconda3/bin/conda shell.zsh hook)"
 
 autoload -U +X compinit && compinit
@@ -507,12 +505,10 @@ autoload -U +X bashcompinit && bashcompinit
 
 # Other things
 [[ -e "/home/linuxbrew/.linuxbrew/bin/brew" ]] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-[[ -a $(brew --prefix)/opt/git-extras/share/git-extras/git-extras-completion.zsh ]] && source $(brew --prefix)/opt/git-extras/share/git-extras/git-extras-completion.zsh
+(( $+commands[brew] )) && [[ -a $(brew --prefix)/opt/git-extras/share/git-extras/git-extras-completion.zsh ]] && source $(brew --prefix)/opt/git-extras/share/git-extras/git-extras-completion.zsh
 
 # Remove duplicate entries in PATH
 PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
 
 # Remove dumb alias of run-help to man and replace with useful run-help for builtins
 autoload run-help
-
-source /home/barrett/.config/broot/launcher/bash/br
