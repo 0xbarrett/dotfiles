@@ -437,9 +437,8 @@ if zplug check "zsh-users/zsh-autosuggestions"; then
     ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 fi
 
-if zplug check "junegunn/fzf"; then
 # Use fd for listing path candidates
-  _fzf_compgen_path() {
+_fzf_compgen_path() {
   fd --hidden --follow --exclude ".git" . "$1"
 }
 
@@ -447,7 +446,6 @@ if zplug check "junegunn/fzf"; then
 _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
-fi
 
 if zplug check "wfxr/forgit"; then
     forgit_log=gli
@@ -470,7 +468,7 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 zplug load
 
 # fzf keybindings
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
 
 # Gruvbox colors
 [[ -f ~/.config/gruvbox_256palette_osx.sh ]] && source ~/.config/gruvbox_256palette_osx.sh
