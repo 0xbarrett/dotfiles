@@ -477,9 +477,6 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # Then, source plugins and add commands to $PATH
 zplug load
 
-# fzf keybindings
-source <(fzf --zsh)
-
 # Gruvbox colors
 [[ -f ~/.config/gruvbox_256palette_osx.sh ]] && source ~/.config/gruvbox_256palette_osx.sh
 
@@ -507,6 +504,9 @@ source <(fzf --zsh)
 
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
+
+# fzf keybindings
+source <(fzf --zsh)
 
 # Load asdf
 [[ -f $HOME/.asdf/asdf.sh ]] && source $HOME/.asdf/asdf.sh
