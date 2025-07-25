@@ -32,7 +32,7 @@ ln -sf $PWD/asdf/.default-python-packages $HOME/.default-python-packages
 #other
 ln -sf $PWD/gruvbox_256palette_osx.sh $HOME/.config/
 ln -sf $PWD/colorls/dark_colors.yaml $HOME/.config/colorls/dark_colors.yaml
-
+ln -sf $PWD/imgcat $HOME/.local/bin/imgcat
 
 if [[ $(uname) == "Linux" ]]; then
   sudo apt install fzf fd-find bat

@@ -185,9 +185,19 @@ function br {
 
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
-export FZF_DEFAULT_OPTS='--height 40% --reverse --border --inline-info --color=dark,bg+:235,hl+:10,pointer:5'
-export FZF_DEFAULT_COMMAND='fd --type f --type d --hidden --follow --exclude .git'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS='--reverse --border'
+# export FZF_DEFAULT_COMMAND='fd --type f --type d --hidden --follow --exclude .git'
+# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+export FZF_CTRL_T_OPTS="
+  --walker-skip .git,node_modules
+  --preview 'bat -n --color=always {}'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+
+export FZF_ALT_C_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'tree -C {}'"
+
 export CLICOLOR="YES" # Equivalent to passing -G to ls.
 export LSCOLORS="exgxdHdHcxaHaHhBhDeaec"
 export HUB_PROTOCOL=https
@@ -489,7 +499,7 @@ source <(fzf --zsh)
 [[ -d "/Applications/Araxis\ Merge.app/Contents/Utilities" ]] && export PATH="/Applications/Araxis\ Merge.app/Contents/Utilities:$PATH"
 [[ -d "$HOME/Library/Android/sdk/platform-tools" ]] && export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
 [[ -d "/usr/local/sbin" ]] && export PATH="$PATH:/usr/local/sbin"
-[[ -d "$HOME/.local/bin" ]] && export PATH="$PATH:$HOME/.local/bin"
+[[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"
 [[ -d "/opt/homebrew/opt/make/libexec/gnubin" ]] && export PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
 [[ -d "/usr/local/cuda" ]] && export PATH="/usr/local/cuda/bin:$PATH"
 [[ -d "/usr/local/cuda" ]] && export LD_LIBRARY_PATH="/usr/local/cuda/lib64"
@@ -511,3 +521,5 @@ PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH})
 
 # Remove dumb alias of run-help to man and replace with useful run-help for builtins
 autoload run-help
+
+. "$HOME/.local/bin/env"
