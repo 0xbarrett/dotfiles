@@ -284,7 +284,7 @@ alias tm="tmux -2"
 alias help="run-help"
 alias tre="br"
 alias ctl="sudo systemctl"
-alias jrl="sudo journalctl"
+alias jrl="journalctl -fu"
 
 # Remove .DS_Store files from current directory, recursively
 alias rmds="find . -name '*.DS_Store' -type f -delete"
@@ -491,7 +491,8 @@ source <(fzf --zsh)
 [[ -d "/usr/local/sbin" ]] && export PATH="$PATH:/usr/local/sbin"
 [[ -d "$HOME/.local/bin" ]] && export PATH="$PATH:$HOME/.local/bin"
 [[ -d "/opt/homebrew/opt/make/libexec/gnubin" ]] && export PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
-[[ -d "/usr/lib/cuda" ]] && export PATH="/usr/lib/cuda/bin:$PATH"
+[[ -d "/usr/local/cuda" ]] && export PATH="/usr/local/cuda/bin:$PATH"
+[[ -d "/usr/local/cuda" ]] && export LD_LIBRARY_PATH="/usr/local/cuda/lib64"
 [[ -d "$HOME/anaconda3/" ]] && eval "$(/home/barrett/anaconda3/bin/conda shell.zsh hook)"
 
 autoload -U +X compinit && compinit
