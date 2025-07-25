@@ -486,7 +486,6 @@ source <(fzf --zsh)
 # Rust env stuff
 [[ -f ~/.cargo/env ]] && source ~/.cargo/env
 
-[[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
 [[ -d "/Applications/Araxis\ Merge.app/Contents/Utilities" ]] && export PATH="/Applications/Araxis\ Merge.app/Contents/Utilities:$PATH"
 [[ -d "$HOME/Library/Android/sdk/platform-tools" ]] && export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
 [[ -d "/usr/local/sbin" ]] && export PATH="$PATH:/usr/local/sbin"
@@ -511,3 +510,5 @@ PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH})
 
 # Remove dumb alias of run-help to man and replace with useful run-help for builtins
 autoload run-help
+
+. "$HOME/.local/bin/env"
