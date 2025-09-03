@@ -35,8 +35,8 @@ ln -sf $PWD/colorls/dark_colors.yaml $HOME/.config/colorls/dark_colors.yaml
 ln -sf $PWD/imgcat $HOME/.local/bin/imgcat
 
 if [[ $(uname) == "Linux" ]]; then
-  sudo apt install fzf fd-find bat
+  sudo apt install fd-find bat
   sudo ln -sf /usr/bin/batcat /usr/bin/bat
 else
-  brew install fzf fd
+  brew install fd bat
 fi
