@@ -319,7 +319,7 @@ alias grst="git restore"
 alias grsts="git restore --staged"
 alias gmt="git mergetool"
 alias gsupfrfr="git submodule update --init --recursive --force && git submodule foreach --recursive git clean -ffd && git clean -ffd"
-alias gcch="git rev-parse --short HEAD | tee >(tr -d '\n' | pbcopy)"
+alias gcch="git rev-parse HEAD | tee >(tr -d '\n' | pbcopy)"
 
 alias src='source ~/.zshrc'
 alias wch='type -a'
