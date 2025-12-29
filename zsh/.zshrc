@@ -326,11 +326,11 @@ alias wch='type -a'
 
 # ls stuff
 if (( $+commands[lsd] )); then
-  alias ls='lsd -F --group-dirs first'
+  alias ls='lsd -h -F --group-dirs first'
 elif (( $+commands[gls] )); then
-  alias ls='gls -F --color --group-directories-first'
+  alias ls='gls -h -F --color --group-directories-first'
 else
-  alias ls='ls --color=auto --group-directories-first'
+  alias ls='ls -h --color=auto --group-directories-first'
 fi
 
 alias lal='ls -al'
@@ -339,8 +339,6 @@ alias ll='ls -lF'          # Show long file information
 alias la='ls -lAFh'        # #long list,show almost all,show type,human readable
 alias lx='ls -lXB'         # Sort by extension
 alias lk='ls -lSr'         # Sort by size, biggest last
-alias lc='ls -ltcr'        # Sort by and show change time, most recent last
-alias lu='ls -ltur'        # Sort by and show access time, most recent last
 alias lt='ls -ltr'         # Sort by date, most recent last
 alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less' # Full recursive directory listing
 
