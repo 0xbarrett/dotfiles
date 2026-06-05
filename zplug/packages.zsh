@@ -46,3 +46,5 @@ zplug "zsh-users/zsh-autosuggestions, defer:3"
 # zsh-syntax-highlighting must be loaded after executing compinit command
 # and sourcing other plugins
 zplug "zdharma/fast-syntax-highlighting", defer:3
+
+zplug "wintermi/zsh-mise"

@@ -11,8 +11,8 @@ ln -sf $PWD/zsh/zlogin.zsh $HOME/.zlogin
 ln -sf $PWD/zsh/.p10k.zsh $HOME/.config/p10k/.p10k.zsh
 
 # zplug
-[ ! -d ~/.zplug ] && git clone https://github.com/zplug/zplug ~/.zplug
-ln -sf $PWD/zplug/packages.zsh ~/.zplug_packages.zsh
+[ ! -d $HOME/.zplug ] && git clone https://github.com/zplug/zplug $HOME/.zplug
+ln -sf $PWD/zplug/packages.zsh $HOME/.zplug_packages.zsh
 
 # git
 ln -sf $PWD/git/.gitconfig $HOME/.gitconfig
@@ -25,7 +25,6 @@ ln -sf $PWD/tig/.tigrc $HOME/.tigrc
 ln -sf $PWD/ruby/irbrc $HOME/.irbrc
 
 # asdf
-ln -sf $PWD/asdf/.default-gems $HOME/.default-gems
 ln -sf $PWD/asdf/.default-npm-packages $HOME/.default-npm-packages
 ln -sf $PWD/asdf/.default-python-packages $HOME/.default-python-packages
 
@@ -37,6 +36,10 @@ ln -sf $PWD/imgcat $HOME/.local/bin/imgcat
 if [[ $(uname) == "Linux" ]]; then
   sudo apt install fd-find bat
   sudo ln -sf /usr/bin/batcat /usr/bin/bat
+
+  sudo add-apt-repository -y ppa:jdxcode/mise
+  sudo apt update -y
+  sudo apt install -y mise
 else
-  brew install fd bat
+  brew install fd bat mise
 fi

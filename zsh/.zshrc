@@ -507,8 +507,10 @@ autoload -U +X bashcompinit && bashcompinit
 source <(fzf --zsh)
 
 # Load asdf
-[[ -f $HOME/.asdf/asdf.sh ]] && source $HOME/.asdf/asdf.sh
-[[ -f $HOME/.asdf/completions/asdf.bash ]] && source $HOME/.asdf/completions/asdf.bash
+# [[ -f $HOME/.asdf/asdf.sh ]] && source $HOME/.asdf/asdf.sh
+# [[ -f $HOME/.asdf/completions/asdf.bash ]] && source $HOME/.asdf/completions/asdf.bash
+
+eval "$(mise activate zsh)"
 
 # Other things
 [[ -e "/home/linuxbrew/.linuxbrew/bin/brew" ]] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)

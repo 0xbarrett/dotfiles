@@ -1,9 +1,5 @@
-gulp
-lodash
 request
-express
 eslint
 js-beautify
 nodemon
 jasmine
-apollo
