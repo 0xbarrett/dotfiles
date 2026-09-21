@@ -498,7 +498,7 @@ zplug load
 [[ -d "/opt/homebrew/opt/make/libexec/gnubin" ]] && export PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
 [[ -d "/usr/local/cuda" ]] && export PATH="/usr/local/cuda/bin:$PATH"
 [[ -d "/usr/local/cuda" ]] && export LD_LIBRARY_PATH="/usr/local/cuda/lib64"
-[[ -d "$HOME/anaconda3/" ]] && eval "$(/home/barrett/anaconda3/bin/conda shell.zsh hook)"
+[[ -d "$HOME/anaconda3/" ]] && eval "$($HOME/anaconda3/bin/conda shell.zsh hook)"
 
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
