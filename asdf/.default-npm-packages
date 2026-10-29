@@ -1,5 +1,2 @@
-request
+corepack
 eslint
-js-beautify
-nodemon
-jasmine

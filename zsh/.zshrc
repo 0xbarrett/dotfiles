@@ -521,3 +521,8 @@ PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH})
 
 # Remove dumb alias of run-help to man and replace with useful run-help for builtins
 autoload run-help
+
+# opencode
+export PATH=/Users/barrett/.opencode/bin:$PATH
+
+eval "$(pkgx --quiet dev --shellcode)"  # https://github.com/pkgxdev/dev
