@@ -500,18 +500,17 @@ zplug load
 [[ -d "/usr/local/cuda" ]] && export PATH="/usr/local/cuda/bin:$PATH"
 [[ -d "/usr/local/cuda" ]] && export LD_LIBRARY_PATH="/usr/local/cuda/lib64"
 [[ -d "$HOME/anaconda3/" ]] && eval "$($HOME/anaconda3/bin/conda shell.zsh hook)"
-
-autoload -U +X compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
+[[ -d "$HOME/.opencode/bin" ]] && export PATH="$HOME/.opencode/bin:$PATH"
 
 # fzf keybindings
 source <(fzf --zsh)
 
-# Load asdf
-# [[ -f $HOME/.asdf/asdf.sh ]] && source $HOME/.asdf/asdf.sh
-# [[ -f $HOME/.asdf/completions/asdf.bash ]] && source $HOME/.asdf/completions/asdf.bash
+#pkgx
+eval "$(pkgx --quiet dev --shellcode)"  # https://github.com/pkgxdev/dev
 
+#mise
 eval "$(mise activate zsh)"
+fpath+=('/Users/barrett/.local/share/zsh/site-functions')
 
 # Other things
 [[ -e "/home/linuxbrew/.linuxbrew/bin/brew" ]] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
@@ -523,7 +522,5 @@ PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH})
 # Remove dumb alias of run-help to man and replace with useful run-help for builtins
 autoload run-help
 
-# opencode
-export PATH=/Users/barrett/.opencode/bin:$PATH
-
-eval "$(pkgx --quiet dev --shellcode)"  # https://github.com/pkgxdev/dev
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
