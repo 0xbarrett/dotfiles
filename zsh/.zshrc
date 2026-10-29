@@ -204,6 +204,7 @@ export HUB_PROTOCOL=https
 export BAT_THEME="1337"
 export GOPATH="$HOME/go"
 export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
 export HOMEBREW_NO_ENV_HINTS=1
 export PAGER=bat
 
