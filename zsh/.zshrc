@@ -510,13 +510,13 @@ if command -v pkgx >/dev/null 2>&1; then
   eval "$(pkgx --quiet dev --shellcode)"
 fi
 
-#mise
-eval "$(mise activate zsh)"
-fpath+=('/Users/barrett/.local/share/zsh/site-functions')
-
 # Other things
 [[ -e "/home/linuxbrew/.linuxbrew/bin/brew" ]] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 (( $+commands[brew] )) && [[ -a $(brew --prefix)/opt/git-extras/share/git-extras/git-extras-completion.zsh ]] && source $(brew --prefix)/opt/git-extras/share/git-extras/git-extras-completion.zsh
+
+#mise
+eval "$(mise activate zsh)"
+fpath+=('/Users/barrett/.local/share/zsh/site-functions')
 
 # Remove duplicate entries in PATH
 PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
