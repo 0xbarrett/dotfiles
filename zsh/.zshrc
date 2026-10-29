@@ -506,7 +506,9 @@ zplug load
 source <(fzf --zsh)
 
 #pkgx
-eval "$(pkgx --quiet dev --shellcode)"  # https://github.com/pkgxdev/dev
+if command -v pkgx >/dev/null 2>&1; then
+  eval "$(pkgx --quiet dev --shellcode)"
+fi
 
 #mise
 eval "$(mise activate zsh)"
